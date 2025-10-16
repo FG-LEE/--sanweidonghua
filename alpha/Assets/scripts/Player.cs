@@ -59,6 +59,8 @@ public class Player : MonoBehaviour
         if (dashTime > 0)
         {
             rb.velocity = new Vector3(faceDir*moveSpeed* dashSpeed, rb.velocity.y, 0);
+            AudioManager.instance.PlaySFX(0);
+            AudioManager.instance.StopSFX(0);
         }
         else
         {
