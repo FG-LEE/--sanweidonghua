@@ -3,7 +3,19 @@
   "WorkspaceRootPath": "E:\\12\\alpha\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|e:\\12\\alpha\\assets\\scripts\\player1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|E:\\12\\alpha\\assets\\scripts\\follow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\follow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|e:\\12\\alpha\\assets\\scripts\\parallax_new.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\parallax_new.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|E:\\12\\alpha\\assets\\scripts\\backgroundlayer1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\backgroundlayer1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|E:\\12\\alpha\\assets\\scripts\\player1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -18,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,26 +54,63 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BackgroundLayer1.cs",
+              "DocumentMoniker": "E:\\12\\alpha\\Assets\\scripts\\BackgroundLayer1.cs",
+              "RelativeDocumentMoniker": "Assets\\scripts\\BackgroundLayer1.cs",
+              "ToolTip": "E:\\12\\alpha\\Assets\\scripts\\BackgroundLayer1.cs",
+              "RelativeToolTip": "Assets\\scripts\\BackgroundLayer1.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwAoAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-16T06:04:55.323Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "parallax_new.cs",
+              "DocumentMoniker": "E:\\12\\alpha\\Assets\\scripts\\parallax_new.cs",
+              "RelativeDocumentMoniker": "Assets\\scripts\\parallax_new.cs",
+              "ToolTip": "E:\\12\\alpha\\Assets\\scripts\\parallax_new.cs",
+              "RelativeToolTip": "Assets\\scripts\\parallax_new.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-16T05:50:14.239Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "follow.cs",
+              "DocumentMoniker": "E:\\12\\alpha\\Assets\\scripts\\follow.cs",
+              "RelativeDocumentMoniker": "Assets\\scripts\\follow.cs",
+              "ToolTip": "E:\\12\\alpha\\Assets\\scripts\\follow.cs",
+              "RelativeToolTip": "Assets\\scripts\\follow.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T03:38:39.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Player1.cs",
               "DocumentMoniker": "E:\\12\\alpha\\Assets\\scripts\\Player1.cs",
               "RelativeDocumentMoniker": "Assets\\scripts\\Player1.cs",
               "ToolTip": "E:\\12\\alpha\\Assets\\scripts\\Player1.cs",
               "RelativeToolTip": "Assets\\scripts\\Player1.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAwDIAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwDIAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T08:24:20.856Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-04T08:24:20.856Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Player.cs",
               "DocumentMoniker": "E:\\12\\alpha\\Assets\\scripts\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\scripts\\Player.cs",
               "ToolTip": "E:\\12\\alpha\\Assets\\scripts\\Player.cs",
               "RelativeToolTip": "Assets\\scripts\\Player.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwBMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-04T04:35:01.023Z"
             }

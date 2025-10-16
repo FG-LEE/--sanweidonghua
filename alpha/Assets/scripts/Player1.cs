@@ -49,6 +49,7 @@ public class Player1 : MonoBehaviour
         }
 
         isMoving = rb.velocity.x != 0;
+        anime.SetFloat("Speed", Mathf.Abs(xInput));
         anime.SetBool("isMoving", isMoving);
         anime.SetBool("isGround", isGround);
     }
