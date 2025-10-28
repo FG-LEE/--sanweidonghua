@@ -2104,14 +2104,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8da5e724a335f7459e816d14d720ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  anime: {fileID: 0}
-  moveSpeed: 0
-  jumpForce: 0
-  dashDuration: 0
-  dashTime: 0
-  dashSpeed: 0
-  whatisGround:
+  rb: {fileID: 1472906405}
+  anime: {fileID: 2125294411}
+  moveSpeed: 5
+  acceleration: 15
+  deceleration: 10
+  jumpForce: 12
+  maxJumpHeight: 6
+  minJumpHeight: 1
+  maxJumpCount: 2
+  jumpBufferTime: 0.15
+  coyoteTime: 0.1
+  riseGravityScale: 1
+  fallGravityScale: 2.2
+  fastFallGravityScale: 4
+  maxFallSpeed: -25
+  lowJumpMultiplier: 1.8
+  dashDuration: 0.1
+  dashSpeed: 12
+  whatIsGround:
     serializedVersion: 2
     m_Bits: 8
   groundCheckDistance: 0.2
@@ -2148,7 +2159,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.49
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2451,6 +2462,11 @@ PrefabInstance:
 --- !u!4 &2125294410 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1279878232309987924, guid: e97e268685eeeac42b19d85350de9fac, type: 3}
+  m_PrefabInstance: {fileID: 2125294409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2125294411 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: e97e268685eeeac42b19d85350de9fac, type: 3}
   m_PrefabInstance: {fileID: 2125294409}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807

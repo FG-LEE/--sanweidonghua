@@ -89,7 +89,7 @@ public class AudioManager : MonoBehaviour
     {
         for (int i = 0; i < bgm.Length; i++)
         {
-            bgm[i].Stop();
+            bgm[i].Stop(); 
         }
     }
 

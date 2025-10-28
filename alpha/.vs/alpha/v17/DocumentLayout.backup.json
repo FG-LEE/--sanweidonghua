@@ -3,11 +3,19 @@
   "WorkspaceRootPath": "D:\\UGit\\--sanweidonghua\\alpha\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|d:\\ugit\\--sanweidonghua\\alpha\\assets\\scripts\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|d:\\ugit\\--sanweidonghua\\alpha\\assets\\scripts\\obstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\obstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\alpha\\assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|d:\\ugit\\--sanweidonghua\\alpha\\assets\\scripts\\follow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\alpha\\assets\\scripts\\follow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\follow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -29,7 +37,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -53,7 +61,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "PlayerHealth.cs",
+              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\PlayerHealth.cs",
+              "RelativeDocumentMoniker": "Assets\\scripts\\PlayerHealth.cs",
+              "ToolTip": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\PlayerHealth.cs",
+              "RelativeToolTip": "Assets\\scripts\\PlayerHealth.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T09:08:18.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Obstacle.cs",
+              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\Obstacle.cs",
+              "RelativeDocumentMoniker": "Assets\\scripts\\Obstacle.cs",
+              "ToolTip": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\Obstacle.cs",
+              "RelativeToolTip": "Assets\\scripts\\Obstacle.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAYwAoAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-16T10:51:03.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "BackgroundLayer1.cs",
               "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\BackgroundLayer1.cs",
               "RelativeDocumentMoniker": "Assets\\scripts\\BackgroundLayer1.cs",
@@ -65,7 +99,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "parallax_new.cs",
               "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\parallax_new.cs",
               "RelativeDocumentMoniker": "Assets\\scripts\\parallax_new.cs",
@@ -77,7 +111,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "follow.cs",
               "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\follow.cs",
               "RelativeDocumentMoniker": "Assets\\scripts\\follow.cs",
@@ -85,12 +119,11 @@
               "RelativeToolTip": "Assets\\scripts\\follow.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-15T03:38:39.126Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-15T03:38:39.126Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Player1.cs",
               "DocumentMoniker": "E:\\12\\alpha\\Assets\\scripts\\Player1.cs",
               "ToolTip": "E:\\12\\alpha\\Assets\\scripts\\Player1.cs",
@@ -100,7 +133,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Player.cs",
               "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\scripts\\Player.cs",
@@ -108,8 +141,7 @@
               "RelativeToolTip": "Assets\\scripts\\Player.cs",
               "ViewState": "AgIAACoAAAAAAAAAAAAYwDsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T04:35:01.023Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-04T04:35:01.023Z"
             }
           ]
         }
