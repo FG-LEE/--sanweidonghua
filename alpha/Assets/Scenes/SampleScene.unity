@@ -365,6 +365,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderQueueOffset: 1
   applyOnStart: 1
+--- !u!1 &439549179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 439549181}
+  - component: {fileID: 439549180}
+  m_Layer: 0
+  m_Name: VfxManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &439549180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439549179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f2d8221eaaea24aa9f49d7175ad1be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxLibrary:
+  - {fileID: 4951651143080066880, guid: b5a2d67b111cc9249bc64ac048e26c05, type: 3}
+  vfxMinimumDistance: 10
+--- !u!4 &439549181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439549179}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.41991, y: 7.3738446, z: 10.903048}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &552060971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2778,6 +2825,9 @@ PrefabInstance:
       addedObject: {fileID: 1472906404}
     - targetCorrespondingSourceObject: {fileID: 8150357300818250385, guid: e97e268685eeeac42b19d85350de9fac, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 2125294412}
+    - targetCorrespondingSourceObject: {fileID: 8150357300818250385, guid: e97e268685eeeac42b19d85350de9fac, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1472906403}
   m_SourcePrefab: {fileID: 100100000, guid: e97e268685eeeac42b19d85350de9fac, type: 3}
 --- !u!4 &2125294410 stripped
@@ -2790,6 +2840,23 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: e97e268685eeeac42b19d85350de9fac, type: 3}
   m_PrefabInstance: {fileID: 2125294409}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2125294412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472906402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f6482b886c985458f574a207423c87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashKey: 304
+  dashCooldown: 1
+  dashParticleEffect: {fileID: 4951651143080066880, guid: b5a2d67b111cc9249bc64ac048e26c05, type: 3}
+  isCooldown: 0
+  cooldownTimer: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2800,3 +2867,4 @@ SceneRoots:
   - {fileID: 2097669720}
   - {fileID: 1207059073}
   - {fileID: 1948590772}
+  - {fileID: 439549181}

@@ -1,34 +1,46 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\UGit\\--sanweidonghua\\alpha\\",
+  "WorkspaceRootPath": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\alpha\\assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|d:\\ugit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\assets\\scripts\\vfxmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\vfxmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|d:\\ugit\\--sanweidonghua\\alpha\\assets\\scripts\\audiomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|d:\\ugit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\assets\\scripts\\playermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\assets\\scripts\\audiomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\audiomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|d:\\ugit\\--sanweidonghua\\alpha\\assets\\scripts\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\assets\\scripts\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\alpha\\assets\\scripts\\obstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\assets\\scripts\\obstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\obstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\alpha\\assets\\scripts\\follow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\assets\\scripts\\follow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\follow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\alpha\\assets\\scripts\\parallax_new.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\assets\\scripts\\parallax_new.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\parallax_new.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\alpha\\assets\\scripts\\backgroundlayer1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\assets\\scripts\\backgroundlayer1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24D2D8EB-FA5F-3990-CAEA-0D5F3522EACC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\backgroundlayer1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\Vfx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\scripts\\Vfx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,61 +50,77 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 0,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{c9c0ae26-aa77-11d2-b3f0-0000f87570ee}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{2d7728c2-de0a-45b5-99aa-89b609dfde73}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "VfxManager.cs",
+              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\VfxManager.cs",
+              "RelativeDocumentMoniker": "Assets\\scripts\\VfxManager.cs",
+              "ToolTip": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\VfxManager.cs",
+              "RelativeToolTip": "Assets\\scripts\\VfxManager.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAAAIUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T10:02:03.865Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AudioManager.cs",
-              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\AudioManager.cs",
-              "RelativeDocumentMoniker": "Assets\\scripts\\AudioManager.cs",
-              "ToolTip": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\AudioManager.cs",
-              "RelativeToolTip": "Assets\\scripts\\AudioManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFsAAAAbAAAAAAAAAA==",
+              "Title": "PlayerManager.cs",
+              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\PlayerManager.cs",
+              "RelativeDocumentMoniker": "Assets\\scripts\\PlayerManager.cs",
+              "ToolTip": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\PlayerManager.cs",
+              "RelativeToolTip": "Assets\\scripts\\PlayerManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T09:15:58.927Z",
+              "WhenOpened": "2025-11-06T09:57:51.821Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Vfx.cs",
+              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\Vfx.cs",
+              "RelativeDocumentMoniker": "Assets\\scripts\\Vfx.cs",
+              "ToolTip": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\Vfx.cs",
+              "RelativeToolTip": "Assets\\scripts\\Vfx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T09:43:51.669Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PlayerHealth.cs",
-              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\PlayerHealth.cs",
-              "RelativeDocumentMoniker": "Assets\\scripts\\PlayerHealth.cs",
-              "ToolTip": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\PlayerHealth.cs",
-              "RelativeToolTip": "Assets\\scripts\\PlayerHealth.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAASAAAAAAAAAA==",
+              "Title": "AudioManager.cs",
+              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\AudioManager.cs",
+              "RelativeDocumentMoniker": "Assets\\scripts\\AudioManager.cs",
+              "ToolTip": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\AudioManager.cs",
+              "RelativeToolTip": "Assets\\scripts\\AudioManager.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAgwCUAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T09:08:18.818Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-28T09:15:58.927Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
+              "Title": "PlayerHealth.cs",
+              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\PlayerHealth.cs",
+              "RelativeDocumentMoniker": "Assets\\scripts\\PlayerHealth.cs",
+              "ToolTip": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\PlayerHealth.cs",
+              "RelativeToolTip": "Assets\\scripts\\PlayerHealth.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T09:08:18.818Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Obstacle.cs",
-              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\Obstacle.cs",
+              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\Obstacle.cs",
               "RelativeDocumentMoniker": "Assets\\scripts\\Obstacle.cs",
-              "ToolTip": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\Obstacle.cs",
+              "ToolTip": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\Obstacle.cs",
               "RelativeToolTip": "Assets\\scripts\\Obstacle.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAYwAoAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -100,11 +128,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "BackgroundLayer1.cs",
-              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\BackgroundLayer1.cs",
+              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\BackgroundLayer1.cs",
               "RelativeDocumentMoniker": "Assets\\scripts\\BackgroundLayer1.cs",
-              "ToolTip": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\BackgroundLayer1.cs",
+              "ToolTip": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\BackgroundLayer1.cs",
               "RelativeToolTip": "Assets\\scripts\\BackgroundLayer1.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAYwAoAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -112,11 +140,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "parallax_new.cs",
-              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\parallax_new.cs",
+              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\parallax_new.cs",
               "RelativeDocumentMoniker": "Assets\\scripts\\parallax_new.cs",
-              "ToolTip": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\parallax_new.cs",
+              "ToolTip": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\parallax_new.cs",
               "RelativeToolTip": "Assets\\scripts\\parallax_new.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAAwBEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -124,11 +152,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "follow.cs",
-              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\follow.cs",
+              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\follow.cs",
               "RelativeDocumentMoniker": "Assets\\scripts\\follow.cs",
-              "ToolTip": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\follow.cs",
+              "ToolTip": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\follow.cs",
               "RelativeToolTip": "Assets\\scripts\\follow.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -136,16 +164,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Player.cs",
-              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\Player.cs",
+              "DocumentMoniker": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\scripts\\Player.cs",
-              "ToolTip": "D:\\UGit\\--sanweidonghua\\alpha\\Assets\\scripts\\Player.cs",
+              "ToolTip": "D:\\UGit\\--sanweidonghua\\--sanweidonghua\\--sanweidonghua\\alpha\\Assets\\scripts\\Player.cs",
               "RelativeToolTip": "Assets\\scripts\\Player.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAOYBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T04:35:01.023Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-04T04:35:01.023Z"
             }
           ]
         }
