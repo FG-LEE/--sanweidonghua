@@ -86,8 +86,8 @@
     <Compile Include="Assets\VFX\素材\FinalIK\RootMotion\FinalIK\IK Solvers\IKMappingBone.cs" />
     <Compile Include="Assets\VFX\素材\FinalIK\RootMotion\Shared Demo Assets\Scripts\Character Controllers\CharacterAnimationBase.cs" />
     <Compile Include="Assets\VFX\素材\FinalIK\RootMotion\FinalIK\Ragdoll Utility\RagdollUtility.cs" />
-    <Compile Include="Assets\VFX\素材\FinalIK\RootMotion\Shared Demo Assets\Scripts\Character Controllers\CharacterAnimationSimple.cs" />
     <Compile Include="Assets\VFX\素材\ThirdPartys\Cloth\SpringBone.cs" />
+    <Compile Include="Assets\VFX\素材\FinalIK\RootMotion\Shared Demo Assets\Scripts\Character Controllers\CharacterAnimationSimple.cs" />
     <Compile Include="Assets\VFX\素材\FinalIK\RootMotion\Shared Scripts\V3Tools.cs" />
     <Compile Include="Assets\scripts\follow.cs" />
     <Compile Include="Assets\VFX\素材\FinalIK\RootMotion\FinalIK\BipedIK\BipedIKSolvers.cs" />
@@ -106,6 +106,7 @@
     <Compile Include="Assets\VFX\素材\FinalIK\RootMotion\FinalIK\Tools\AimPoser.cs" />
     <Compile Include="Assets\VFX\素材\FinalIK\RootMotion\Shared Scripts\QuaTools.cs" />
     <Compile Include="Assets\VFX\素材\FinalIK\RootMotion\FinalIK\_DEMOS\Grounder\Scripts\GrounderDemo.cs" />
+    <Compile Include="Assets\scripts\VfxManager.cs" />
     <Compile Include="Assets\scripts\BackgroundLayer1.cs" />
     <Compile Include="Assets\VFX\素材\FinalIK\RootMotion\FinalIK\IK Components\IK.cs" />
     <Compile Include="Assets\VFX\NatureManufacture Assets\NatureManufacture Wind\NM_Wind.cs" />

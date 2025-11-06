@@ -365,6 +365,7 @@
 "Assets/scripts/PlayerHealth.cs"
 "Assets/scripts/PlayerManager.cs"
 "Assets/scripts/PlayerMovement.cs"
+"Assets/scripts/VfxManager.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
 "Assets/VFX/NatureManufacture Assets/Dynamic Nature - Starter/Assets/Scripts/SnowManager.cs"
 "Assets/VFX/NatureManufacture Assets/NatureManufacture Wind/NM_Wind.cs"
