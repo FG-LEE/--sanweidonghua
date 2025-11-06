@@ -4,206 +4,208 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // ×é¼şÒıÓÃ
-    public Rigidbody rb;                    // ¸ÕÌå×é¼ş£¬ÓÃÓÚÎïÀíÔË¶¯
-    [SerializeField] private Animator anime; // ¶¯»­¿ØÖÆÆ÷£¬ÓÃÓÚ½ÇÉ«¶¯»­
-    private bool isMoving;                  // ÊÇ·ñÕıÔÚÒÆ¶¯µÄ±êÖ¾
+    // ç»„ä»¶å¼•ç”¨
+    public Rigidbody rb;                    // åˆšä½“ç»„ä»¶ï¼Œç”¨äºç‰©ç†è¿åŠ¨
+    [SerializeField] private Animator anime; // åŠ¨ç”»æ§åˆ¶å™¨ï¼Œç”¨äºè§’è‰²åŠ¨ç”»
+    private bool isMoving;                  // æ˜¯å¦æ­£åœ¨ç§»åŠ¨çš„æ ‡å¿—
 
-    // ========== ÒÆ¶¯Ïà¹Ø±äÁ¿ ==========
+    // ========== ç§»åŠ¨ç›¸å…³å˜é‡ ==========
     [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 8f;        // »ù´¡ÒÆ¶¯ËÙ¶È
-    [SerializeField] private float acceleration = 15f;    // ¼ÓËÙÏµÊı£¬ÖµÔ½´ó¼ÓËÙÔ½¿ì
-    [SerializeField] private float deceleration = 10f;    // ¼õËÙÏµÊı£¬ÖµÔ½´ó¼õËÙÔ½¿ì
-    private float currentHorizontalSpeed;   // µ±Ç°Ë®Æ½ËÙ¶È£¬ÓÃÓÚÆ½»¬¹ı¶É
-    private float xInput;                   // Ë®Æ½ÊäÈëÖµ (-1, 0, 1)
-    private int faceDir = 1;                // ÃæÏò·½Ïò (1:ÓÒ, -1:×ó)
-    private bool faceRight = true;          // ÊÇ·ñÃæÏòÓÒ²à
+    [SerializeField] private float moveSpeed = 8f;        // åŸºç¡€ç§»åŠ¨é€Ÿåº¦
+    [SerializeField] private float acceleration = 15f;    // åŠ é€Ÿç³»æ•°ï¼Œå€¼è¶Šå¤§åŠ é€Ÿè¶Šå¿«
+    [SerializeField] private float deceleration = 10f;    // å‡é€Ÿç³»æ•°ï¼Œå€¼è¶Šå¤§å‡é€Ÿè¶Šå¿«
+    private float currentHorizontalSpeed;   // å½“å‰æ°´å¹³é€Ÿåº¦ï¼Œç”¨äºå¹³æ»‘è¿‡æ¸¡
+    private float xInput;                   // æ°´å¹³è¾“å…¥å€¼ (-1, 0, 1)
+    private int faceDir = 1;                // é¢å‘æ–¹å‘ (1:å³, -1:å·¦)
+    private bool faceRight = true;          // æ˜¯å¦é¢å‘å³ä¾§
 
-    // ========== ÌøÔ¾Ïà¹Ø±äÁ¿ ==========
+    // ========== è·³è·ƒç›¸å…³å˜é‡ ==========
     [Header("Jump Settings")]
-    [SerializeField] private float jumpForce = 13f;       // ÌøÔ¾Á¦¶È
-    [SerializeField] private float maxJumpHeight = 4f;    // ×î´óÌøÔ¾¸ß¶È
-    [SerializeField] private float minJumpHeight = 1f;    // ×îĞ¡ÌøÔ¾¸ß¶È£¨Ğ¡Ìø£©
-    [SerializeField] private int maxJumpCount = 2;        // ×î´óÌøÔ¾´ÎÊı£¨¶ş¶ÎÌø£©
-    [SerializeField] private float jumpBufferTime = 0.15f; // ÌøÔ¾»º³åÊ±¼ä£¨ÌáÇ°°´¼üÓĞĞ§Ê±¼ä£©
-    [SerializeField] private float coyoteTime = 0.1f;     // ÍÁÀÇÊ±¼ä£¨Àë¿ªÆ½Ì¨ºóÈÔ¿ÉÌøÔ¾µÄÊ±¼ä£©
+    [SerializeField] private float jumpForce = 13f;       // è·³è·ƒåŠ›åº¦
+    [SerializeField] private float maxJumpHeight = 4f;    // æœ€å¤§è·³è·ƒé«˜åº¦
+    [SerializeField] private float minJumpHeight = 1f;    // æœ€å°è·³è·ƒé«˜åº¦ï¼ˆå°è·³ï¼‰
+    [SerializeField] private int maxJumpCount = 2;        // æœ€å¤§è·³è·ƒæ¬¡æ•°ï¼ˆäºŒæ®µè·³ï¼‰
+    [SerializeField] private float jumpBufferTime = 0.15f; // è·³è·ƒç¼“å†²æ—¶é—´ï¼ˆæå‰æŒ‰é”®æœ‰æ•ˆæ—¶é—´ï¼‰
+    [SerializeField] private float coyoteTime = 0.1f;     // åœŸç‹¼æ—¶é—´ï¼ˆç¦»å¼€å¹³å°åä»å¯è·³è·ƒçš„æ—¶é—´ï¼‰
 
-    // ÌøÔ¾×´Ì¬±äÁ¿
-    private int currentJumpCount = 0;       // µ±Ç°ÌøÔ¾´ÎÊı
-    private float jumpBufferCounter;        // ÌøÔ¾»º³å¼ÆÊ±Æ÷
-    private float coyoteTimeCounter;        // ÍÁÀÇÊ±¼ä¼ÆÊ±Æ÷
-    private bool isJumping = false;         // ÊÇ·ñÕıÔÚÌøÔ¾
-    private float jumpStartY;               // ÌøÔ¾ÆğÊ¼Y×ø±ê£¨ÓÃÓÚ¼ÆËãÌøÔ¾¸ß¶È£©
+    // è·³è·ƒçŠ¶æ€å˜é‡
+    private int currentJumpCount = 0;       // å½“å‰è·³è·ƒæ¬¡æ•°
+    private float jumpBufferCounter;        // è·³è·ƒç¼“å†²è®¡æ—¶å™¨
+    private float coyoteTimeCounter;        // åœŸç‹¼æ—¶é—´è®¡æ—¶å™¨
+    private bool isJumping = false;         // æ˜¯å¦æ­£åœ¨è·³è·ƒ
+    private float jumpStartY;               // è·³è·ƒèµ·å§‹Yåæ ‡ï¼ˆç”¨äºè®¡ç®—è·³è·ƒé«˜åº¦ï¼‰
 
-    // ========== ÖØÁ¦ÓëÏÂÂäÏà¹Ø±äÁ¿ ==========
+    // ========== é‡åŠ›ä¸ä¸‹è½ç›¸å…³å˜é‡ ==========
     [Header("Gravity & Fall Settings")]
-    [SerializeField] private float riseGravityScale = 1f;      // ÉÏÉı½×¶ÎÖØÁ¦ÏµÊı
-    [SerializeField] private float fallGravityScale = 2.2f;    // ÏÂÂä½×¶ÎÖØÁ¦ÏµÊı
-    [SerializeField] private float fastFallGravityScale = 3.5f; // ¿ìËÙÏÂÂäÖØÁ¦ÏµÊı
-    [SerializeField] private float maxFallSpeed = -25f;        // ×î´óÏÂÂäËÙ¶ÈÏŞÖÆ
-    [SerializeField] private float lowJumpMultiplier = 1.8f;   // Ğ¡ÌøÊ±µÄÖØÁ¦ÏµÊı
-    private bool isFastFalling = false;     // ÊÇ·ñÕıÔÚ¿ìËÙÏÂÂä
+    [SerializeField] private float riseGravityScale = 1f;      // ä¸Šå‡é˜¶æ®µé‡åŠ›ç³»æ•°
+    [SerializeField] private float fallGravityScale = 2.2f;    // ä¸‹è½é˜¶æ®µé‡åŠ›ç³»æ•°
+    [SerializeField] private float fastFallGravityScale = 3.5f; // å¿«é€Ÿä¸‹è½é‡åŠ›ç³»æ•°
+    [SerializeField] private float maxFallSpeed = -25f;        // æœ€å¤§ä¸‹è½é€Ÿåº¦é™åˆ¶
+    [SerializeField] private float lowJumpMultiplier = 1.8f;   // å°è·³æ—¶çš„é‡åŠ›ç³»æ•°
+    private bool isFastFalling = false;     // æ˜¯å¦æ­£åœ¨å¿«é€Ÿä¸‹è½
 
-    // ========== ³å´ÌÏà¹Ø±äÁ¿ ==========
+    // ========== å†²åˆºç›¸å…³å˜é‡ ==========
     [Header("Dash Settings")]
-    [SerializeField] private float dashDuration = 0.2f;   // ³å´Ì³ÖĞøÊ±¼ä
-    [SerializeField] private float dashSpeed = 2f;        // ³å´ÌËÙ¶È±¶Êı
-    private float dashTime;                // ³å´ÌÊ£ÓàÊ±¼ä
+    [SerializeField] private float dashDuration = 0.2f;   // å†²åˆºæŒç»­æ—¶é—´
+    [SerializeField] private float dashSpeed = 2f;        // å†²åˆºé€Ÿåº¦å€æ•°
+    private float dashTime;                // å†²åˆºå‰©ä½™æ—¶é—´
 
-    // ========== Åö×²¼ì²âÏà¹Ø±äÁ¿ ==========
+    // ========== ç¢°æ’æ£€æµ‹ç›¸å…³å˜é‡ ==========
     [Header("Collision Detection")]
-    [SerializeField] private LayerMask whatIsGround;          // µØÃæ²ã¼¶ÑÚÂë
-    [SerializeField] private float groundCheckDistance = 0.1f; // µØÃæ¼ì²â¾àÀë
-    private bool isGround;                 // ÊÇ·ñÔÚµØÃæÉÏ
+    [SerializeField] private LayerMask whatIsGround;          // åœ°é¢å±‚çº§æ©ç 
+    [SerializeField] private float groundCheckDistance = 0.1f; // åœ°é¢æ£€æµ‹è·ç¦»
+    private bool isGround;                 // æ˜¯å¦åœ¨åœ°é¢ä¸Š
 
-    // ========== ÉúÃüÖÜÆÚ·½·¨ ==========
+    // ========== ç”Ÿå‘½å‘¨æœŸæ–¹æ³• ==========
 
     /// <summary>
-    /// ³õÊ¼»¯·½·¨£¬ÔÚÓÎÏ·¿ªÊ¼Ê±µ÷ÓÃÒ»´Î
+    /// åˆå§‹åŒ–æ–¹æ³•ï¼Œåœ¨æ¸¸æˆå¼€å§‹æ—¶è°ƒç”¨ä¸€æ¬¡
     /// </summary>
     void Start()
     {
-        // »ñÈ¡×é¼şÒıÓÃ
+        // è·å–ç»„ä»¶å¼•ç”¨
         rb = GetComponent<Rigidbody>();
         anime = GetComponent<Animator>();
 
-        // ³õÊ¼»¯¸ÕÌåÉèÖÃ
-        rb.useGravity = false; // ½ûÓÃÄ¬ÈÏÖØÁ¦£¬Ê¹ÓÃ×Ô¶¨ÒåÖØÁ¦ÏµÍ³
+        // åˆå§‹åŒ–åˆšä½“è®¾ç½®
+        rb.useGravity = false; // ç¦ç”¨é»˜è®¤é‡åŠ›ï¼Œä½¿ç”¨è‡ªå®šä¹‰é‡åŠ›ç³»ç»Ÿ
     }
 
     /// <summary>
-    /// Ã¿Ö¡¸üĞÂ£¬ÓÃÓÚ´¦ÀíÊäÈëºÍ·ÇÎïÀíÏà¹ØµÄÂß¼­
+    /// æ¯å¸§æ›´æ–°ï¼Œç”¨äºå¤„ç†è¾“å…¥å’Œéç‰©ç†ç›¸å…³çš„é€»è¾‘
     /// </summary>
     void Update()
     {
-        GetInput();             // »ñÈ¡Íæ¼ÒÊäÈë
-        HandleTimers();         // ¸üĞÂ¸÷ÖÖ¼ÆÊ±Æ÷
-        HandleJumpInput();      // ´¦ÀíÌøÔ¾ÊäÈë
-        HandleDashInput();      // ´¦Àí³å´ÌÊäÈë
-        UpdateAnimations();     // ¸üĞÂ¶¯»­×´Ì¬
+        GetInput();             // è·å–ç©å®¶è¾“å…¥
+        HandleTimers();         // æ›´æ–°å„ç§è®¡æ—¶å™¨
+        HandleJumpInput();      // å¤„ç†è·³è·ƒè¾“å…¥
+        HandleDashInput();      // å¤„ç†å†²åˆºè¾“å…¥
+        UpdateAnimations();     // æ›´æ–°åŠ¨ç”»çŠ¶æ€
     }
 
     /// <summary>
-    /// ¹Ì¶¨Ê±¼ä²½³¤¸üĞÂ£¬ÓÃÓÚÎïÀíÏà¹ØµÄ¼ÆËã
-    /// ±£Ö¤ÎïÀí¼ÆËãµÄÎÈ¶¨ĞÔ£¬²»ÊÜÖ¡ÂÊÓ°Ïì
+    /// å›ºå®šæ—¶é—´æ­¥é•¿æ›´æ–°ï¼Œç”¨äºç‰©ç†ç›¸å…³çš„è®¡ç®—
+    /// ä¿è¯ç‰©ç†è®¡ç®—çš„ç¨³å®šæ€§ï¼Œä¸å—å¸§ç‡å½±å“
     /// </summary>
     void FixedUpdate()
     {
-        GroundCheck();          // µØÃæÅö×²¼ì²â
-        HandleMovement();       // ´¦ÀíÒÆ¶¯Âß¼­
-        HandleJump();           // ´¦ÀíÌøÔ¾Âß¼­
-        HandleGravity();        // Ó¦ÓÃ×Ô¶¨ÒåÖØÁ¦
-        ClampFallSpeed();       // ÏŞÖÆÏÂÂäËÙ¶È
-        FlipController();       // ¿ØÖÆ½ÇÉ«·­×ª
+        GroundCheck();          // åœ°é¢ç¢°æ’æ£€æµ‹
+        HandleMovement();       // å¤„ç†ç§»åŠ¨é€»è¾‘
+        HandleJump();           // å¤„ç†è·³è·ƒé€»è¾‘
+        HandleGravity();        // åº”ç”¨è‡ªå®šä¹‰é‡åŠ›
+        ClampFallSpeed();       // é™åˆ¶ä¸‹è½é€Ÿåº¦
+        FlipController();       // æ§åˆ¶è§’è‰²ç¿»è½¬
     }
 
-    // ========== ÊäÈë´¦ÀíÓë¼ÆÊ±Æ÷¹ÜÀí ==========
+    // ========== è¾“å…¥å¤„ç†ä¸è®¡æ—¶å™¨ç®¡ç† ==========
 
     /// <summary>
-    /// »ñÈ¡Íæ¼ÒÊäÈë
+    /// è·å–ç©å®¶è¾“å…¥
     /// </summary>
     private void GetInput()
     {
-        // »ñÈ¡Ë®Æ½ÊäÈë£¬·µ»ØÖµÔÚ -1£¨×ó£©µ½ 1£¨ÓÒ£©Ö®¼ä
+        // è·å–æ°´å¹³è¾“å…¥ï¼Œè¿”å›å€¼åœ¨ -1ï¼ˆå·¦ï¼‰åˆ° 1ï¼ˆå³ï¼‰ä¹‹é—´
         xInput = Input.GetAxisRaw("Horizontal");
     }
 
     /// <summary>
-    /// ¹ÜÀí¸÷ÖÖ¼ÆÊ±Æ÷µÄ¸üĞÂ
+    /// ç®¡ç†å„ç§è®¡æ—¶å™¨çš„æ›´æ–°
     /// </summary>
     private void HandleTimers()
     {
-        // ÌøÔ¾»º³å¼ÆÊ±Æ÷£ºÔÊĞíÍæ¼ÒÔÚÂäµØÇ°ÌáÇ°°´ÏÂÌøÔ¾¼ü
+        // è·³è·ƒç¼“å†²è®¡æ—¶å™¨ï¼šå…è®¸ç©å®¶åœ¨è½åœ°å‰æå‰æŒ‰ä¸‹è·³è·ƒé”®
         jumpBufferCounter -= Time.deltaTime;
 
-        // ÍÁÀÇÊ±¼ä¼ÆÊ±Æ÷£ºÔÊĞíÍæ¼ÒÔÚÀë¿ªÆ½Ì¨ºó¶ÌÊ±¼äÄÚÈÔ¿ÉÌøÔ¾
+        // åœŸç‹¼æ—¶é—´è®¡æ—¶å™¨ï¼šå…è®¸ç©å®¶åœ¨ç¦»å¼€å¹³å°åçŸ­æ—¶é—´å†…ä»å¯è·³è·ƒ
         if (isGround)
         {
-            coyoteTimeCounter = coyoteTime; // ÔÚµØÃæÉÏÊ±ÖØÖÃÍÁÀÇÊ±¼ä
+            coyoteTimeCounter = coyoteTime; // åœ¨åœ°é¢ä¸Šæ—¶é‡ç½®åœŸç‹¼æ—¶é—´
         }
         else
         {
-            coyoteTimeCounter -= Time.deltaTime; // ÔÚ¿ÕÖĞÊ±µİ¼õ¼ÆÊ±Æ÷
+            coyoteTimeCounter -= Time.deltaTime; // åœ¨ç©ºä¸­æ—¶é€’å‡è®¡æ—¶å™¨
         }
 
-        // ³å´Ì¼ÆÊ±Æ÷
+        // å†²åˆºè®¡æ—¶å™¨
         dashTime -= Time.deltaTime;
     }
 
     /// <summary>
-    /// ´¦ÀíÌøÔ¾Ïà¹ØµÄÊäÈë¼ì²â
+    /// å¤„ç†è·³è·ƒç›¸å…³çš„è¾“å…¥æ£€æµ‹
     /// </summary>
     private void HandleJumpInput()
     {
-        // ¼ì²âÌøÔ¾¼ü°´ÏÂ£¬ÉèÖÃÌøÔ¾»º³å
+        // æ£€æµ‹è·³è·ƒé”®æŒ‰ä¸‹ï¼Œè®¾ç½®è·³è·ƒç¼“å†²
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jumpBufferCounter = jumpBufferTime;
         }
 
-        // ¼ì²â¿ìËÙÏÂÂäÊäÈë£¨°´ÏÂS¼ü»òÏÂ·½Ïò¼ü£©
+        // æ£€æµ‹å¿«é€Ÿä¸‹è½è¾“å…¥ï¼ˆæŒ‰ä¸‹Sé”®æˆ–ä¸‹æ–¹å‘é”®ï¼‰
         isFastFalling = (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) &&
                         !isGround && rb.velocity.y < 0;
     }
 
     /// <summary>
-    /// ´¦Àí³å´ÌÊäÈë
+    /// å¤„ç†å†²åˆºè¾“å…¥
     /// </summary>
     private void HandleDashInput()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            dashTime = dashDuration; // ¿ªÊ¼³å´Ì
+            dashTime = dashDuration; // å¼€å§‹å†²åˆº
         }
     }
 
-    // ========== ÒÆ¶¯¿ØÖÆÏµÍ³ ==========
+    // ========== ç§»åŠ¨æ§åˆ¶ç³»ç»Ÿ ==========
 
     /// <summary>
-    /// ´¦Àí½ÇÉ«ÒÆ¶¯Âß¼­£¬°üº¬Æ½»¬¼ÓËÙºÍ³å´Ì
+    /// å¤„ç†è§’è‰²ç§»åŠ¨é€»è¾‘ï¼ŒåŒ…å«å¹³æ»‘åŠ é€Ÿå’Œå†²åˆº
     /// </summary>
     private void HandleMovement()
     {
-        // ¼ÆËãÄ¿±êËÙ¶È
+        // è®¡ç®—ç›®æ ‡é€Ÿåº¦
         float targetSpeed = xInput * moveSpeed;
 
-        // Ê¹ÓÃ Lerp ÊµÏÖÆ½»¬¼ÓËÙºÍ¼õËÙ
-        if (Mathf.Abs(xInput) > 0.1f) // ÓĞÊäÈëÊ±¼ÓËÙ
+        // ä½¿ç”¨ Lerp å®ç°å¹³æ»‘åŠ é€Ÿå’Œå‡é€Ÿ
+        if (Mathf.Abs(xInput) > 0.1f) // æœ‰è¾“å…¥æ—¶åŠ é€Ÿ
         {
-            // Mathf.Lerp: ´Óµ±Ç°ËÙ¶ÈÆ½»¬¹ı¶Éµ½Ä¿±êËÙ¶È
-            // acceleration * Time.fixedDeltaTime: ¿ØÖÆ¹ı¶ÉËÙ¶È
+            // Mathf.Lerp: ä»å½“å‰é€Ÿåº¦å¹³æ»‘è¿‡æ¸¡åˆ°ç›®æ ‡é€Ÿåº¦
+            // acceleration * Time.fixedDeltaTime: æ§åˆ¶è¿‡æ¸¡é€Ÿåº¦
             currentHorizontalSpeed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed, acceleration * Time.fixedDeltaTime);
+            AudioManager.instance.PlaySFX(0);
         }
-        else // ÎŞÊäÈëÊ±¼õËÙ
+        else // æ— è¾“å…¥æ—¶å‡é€Ÿ
         {
-            // Æ½»¬¼õËÙµ½0
+            // å¹³æ»‘å‡é€Ÿåˆ°0
             currentHorizontalSpeed = Mathf.Lerp(currentHorizontalSpeed, 0f, deceleration * Time.fixedDeltaTime);
+            //AudioManager.instance.PlaySFX(0);
         }
 
-        // ³å´ÌÂß¼­£ºÔÚ³å´ÌÊ±¼äÄÚÓ¦ÓÃ³å´ÌËÙ¶È
+        // å†²åˆºé€»è¾‘ï¼šåœ¨å†²åˆºæ—¶é—´å†…åº”ç”¨å†²åˆºé€Ÿåº¦
         if (dashTime > 0)
         {
-            // ³å´ÌÊ±³¯ÃæÏò·½ÏòÒÆ¶¯£¬ËÙ¶ÈÎª»ù´¡ËÙ¶È³ËÒÔ³å´Ì±¶Êı
+            // å†²åˆºæ—¶æœé¢å‘æ–¹å‘ç§»åŠ¨ï¼Œé€Ÿåº¦ä¸ºåŸºç¡€é€Ÿåº¦ä¹˜ä»¥å†²åˆºå€æ•°
             currentHorizontalSpeed = faceDir * moveSpeed * dashSpeed;
         }
 
-        // Ó¦ÓÃ¼ÆËãºóµÄËÙ¶Èµ½¸ÕÌå
-        // Ö»ĞŞ¸ÄXÖáËÙ¶È£¬±£³ÖYÖá£¨ÌøÔ¾/ÏÂÂä£©ºÍZÖáËÙ¶È²»±ä
+        // åº”ç”¨è®¡ç®—åçš„é€Ÿåº¦åˆ°åˆšä½“
+        // åªä¿®æ”¹Xè½´é€Ÿåº¦ï¼Œä¿æŒYè½´ï¼ˆè·³è·ƒ/ä¸‹è½ï¼‰å’ŒZè½´é€Ÿåº¦ä¸å˜
         rb.velocity = new Vector3(currentHorizontalSpeed, rb.velocity.y, rb.velocity.z);
     }
 
     /// <summary>
-    /// ¿ØÖÆ½ÇÉ«³¯Ïò
-    /// ¸ù¾İÒÆ¶¯·½Ïò×Ô¶¯·­×ª½ÇÉ« sprite
+    /// æ§åˆ¶è§’è‰²æœå‘
+    /// æ ¹æ®ç§»åŠ¨æ–¹å‘è‡ªåŠ¨ç¿»è½¬è§’è‰² sprite
     /// </summary>
     private void FlipController()
     {
-        // ÏòÓÒÒÆ¶¯ÇÒµ±Ç°ÃæÏò×óÊ±·­×ª
+        // å‘å³ç§»åŠ¨ä¸”å½“å‰é¢å‘å·¦æ—¶ç¿»è½¬
         if (currentHorizontalSpeed > 0.1f && !faceRight)
         {
             Flip();
         }
-        // Ïò×óÒÆ¶¯ÇÒµ±Ç°ÃæÏòÓÒÊ±·­×ª
+        // å‘å·¦ç§»åŠ¨ä¸”å½“å‰é¢å‘å³æ—¶ç¿»è½¬
         else if (currentHorizontalSpeed < -0.1f && faceRight)
         {
             Flip();
@@ -211,277 +213,277 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// Ö´ĞĞ½ÇÉ«·­×ª
+    /// æ‰§è¡Œè§’è‰²ç¿»è½¬
     /// </summary>
     private void Flip()
     {
-        faceDir *= -1;          // ·´×ªÃæÏò·½Ïò
-        faceRight = !faceRight; // ¸üĞÂÃæÏò×´Ì¬
+        faceDir *= -1;          // åè½¬é¢å‘æ–¹å‘
+        faceRight = !faceRight; // æ›´æ–°é¢å‘çŠ¶æ€
 
-        // Í¨¹ıĞı×ªÊµÏÖÊÓ¾õÉÏµÄ·­×ª
-        // ÈÆYÖáĞı×ª180¶È
+        // é€šè¿‡æ—‹è½¬å®ç°è§†è§‰ä¸Šçš„ç¿»è½¬
+        // ç»•Yè½´æ—‹è½¬180åº¦
         transform.Rotate(0, 180, 0);
     }
 
-    // ========== ÌøÔ¾¿ØÖÆÏµÍ³ ==========
+    // ========== è·³è·ƒæ§åˆ¶ç³»ç»Ÿ ==========
 
     /// <summary>
-    /// ´¦ÀíÌøÔ¾Âß¼­£¬°üº¬ÌøÔ¾»º³åºÍÍÁÀÇÊ±¼ä
+    /// å¤„ç†è·³è·ƒé€»è¾‘ï¼ŒåŒ…å«è·³è·ƒç¼“å†²å’ŒåœŸç‹¼æ—¶é—´
     /// </summary>
     private void HandleJump()
     {
-        // ÖØÖÃÌøÔ¾×´Ì¬£ºµ±½ÇÉ«ÔÚµØÃæÉÏÇÒÕıÔÚÏÂÂä»ò¾²Ö¹Ê±
+        // é‡ç½®è·³è·ƒçŠ¶æ€ï¼šå½“è§’è‰²åœ¨åœ°é¢ä¸Šä¸”æ­£åœ¨ä¸‹è½æˆ–é™æ­¢æ—¶
         if (isGround && rb.velocity.y <= 0)
         {
-            currentJumpCount = 0;    // ÖØÖÃÌøÔ¾¼ÆÊı
-            isJumping = false;       // ±ê¼ÇÎª·ÇÌøÔ¾×´Ì¬
+            currentJumpCount = 0;    // é‡ç½®è·³è·ƒè®¡æ•°
+            isJumping = false;       // æ ‡è®°ä¸ºéè·³è·ƒçŠ¶æ€
         }
 
-        // Ö´ĞĞÌøÔ¾Ìõ¼ş¼ì²é£ºÌøÔ¾»º³åÓĞĞ§ÇÒ¿ÉÒÔÌøÔ¾
+        // æ‰§è¡Œè·³è·ƒæ¡ä»¶æ£€æŸ¥ï¼šè·³è·ƒç¼“å†²æœ‰æ•ˆä¸”å¯ä»¥è·³è·ƒ
         if (jumpBufferCounter > 0 && CanJump())
         {
-            ExecuteJump(); // Ö´ĞĞÌøÔ¾
+            ExecuteJump(); // æ‰§è¡Œè·³è·ƒ
         }
 
-        // Ğ¡Ìø»úÖÆ£ºËÉ¿ªÌøÔ¾¼üÊ±¼õÉÙÉÏÉıËÙ¶È
-        // ÊµÏÖ¿É±äÌøÔ¾¸ß¶È£¨°´µÃ¾ÃÌøµÃ¸ß£¬°´µÃ¶ÌÌøµÃµÍ£©
+        // å°è·³æœºåˆ¶ï¼šæ¾å¼€è·³è·ƒé”®æ—¶å‡å°‘ä¸Šå‡é€Ÿåº¦
+        // å®ç°å¯å˜è·³è·ƒé«˜åº¦ï¼ˆæŒ‰å¾—ä¹…è·³å¾—é«˜ï¼ŒæŒ‰å¾—çŸ­è·³å¾—ä½ï¼‰
         if (isJumping && rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
         {
-            // Á¢¼´¼õÉÙYÖáËÙ¶È£¬ÊµÏÖĞ¡ÌøĞ§¹û
+            // ç«‹å³å‡å°‘Yè½´é€Ÿåº¦ï¼Œå®ç°å°è·³æ•ˆæœ
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.5f, rb.velocity.z);
         }
     }
 
     /// <summary>
-    /// ¼ì²éÊÇ·ñ¿ÉÒÔ½øĞĞÌøÔ¾
-    /// ¿¼ÂÇÁËÍÁÀÇÊ±¼äºÍ¶à¶ÎÌø
+    /// æ£€æŸ¥æ˜¯å¦å¯ä»¥è¿›è¡Œè·³è·ƒ
+    /// è€ƒè™‘äº†åœŸç‹¼æ—¶é—´å’Œå¤šæ®µè·³
     /// </summary>
-    /// <returns>ÊÇ·ñ¿ÉÒÔÌøÔ¾</returns>
+    /// <returns>æ˜¯å¦å¯ä»¥è·³è·ƒ</returns>
     private bool CanJump()
     {
-        // µÚÒ»¶ÎÌøÌõ¼ş£ºÔÚµØÃæÉÏ»òÍÁÀÇÊ±¼äÄÚ£¬ÇÒÉĞÎ´¿ªÊ¼ÌøÔ¾
+        // ç¬¬ä¸€æ®µè·³æ¡ä»¶ï¼šåœ¨åœ°é¢ä¸Šæˆ–åœŸç‹¼æ—¶é—´å†…ï¼Œä¸”å°šæœªå¼€å§‹è·³è·ƒ
         bool canFirstJump = (isGround || coyoteTimeCounter > 0) && currentJumpCount == 0;
 
-        // ¶à¶ÎÌøÌõ¼ş£ºÔÚ¿ÕÖĞÇÒÌøÔ¾´ÎÊıÎ´´ïÉÏÏŞ
+        // å¤šæ®µè·³æ¡ä»¶ï¼šåœ¨ç©ºä¸­ä¸”è·³è·ƒæ¬¡æ•°æœªè¾¾ä¸Šé™
         bool canMultiJump = !isGround && currentJumpCount < maxJumpCount;
 
         return canFirstJump || canMultiJump;
     }
 
     /// <summary>
-    /// Ö´ĞĞÌøÔ¾¶¯×÷
+    /// æ‰§è¡Œè·³è·ƒåŠ¨ä½œ
     /// </summary>
     private void ExecuteJump()
     {
-        // ¼ÇÂ¼ÌøÔ¾ÆğÊ¼Î»ÖÃ£¨ÓÃÓÚ¼ÆËãÌøÔ¾¸ß¶ÈÏŞÖÆ£©
+        // è®°å½•è·³è·ƒèµ·å§‹ä½ç½®ï¼ˆç”¨äºè®¡ç®—è·³è·ƒé«˜åº¦é™åˆ¶ï¼‰
         if (currentJumpCount == 0)
         {
             jumpStartY = transform.position.y;
         }
 
-        // ÖØÖÃ´¹Ö±ËÙ¶È£¬È·±£Ã¿´ÎÌøÔ¾¸ß¶ÈÒ»ÖÂ
-        // ÏÈ¹éÁãÔÙÊ©¼ÓÌøÔ¾Á¦£¬±ÜÃâÀÛ»ıËÙ¶ÈµÄÓ°Ïì
+        // é‡ç½®å‚ç›´é€Ÿåº¦ï¼Œç¡®ä¿æ¯æ¬¡è·³è·ƒé«˜åº¦ä¸€è‡´
+        // å…ˆå½’é›¶å†æ–½åŠ è·³è·ƒåŠ›ï¼Œé¿å…ç´¯ç§¯é€Ÿåº¦çš„å½±å“
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
-        // Ó¦ÓÃÌøÔ¾ËÙ¶È
+        // åº”ç”¨è·³è·ƒé€Ÿåº¦
         rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
 
-        // ¸üĞÂÌøÔ¾×´Ì¬
-        currentJumpCount++;          // Ôö¼ÓÌøÔ¾¼ÆÊı
-        jumpBufferCounter = 0;       // Çå³ıÌøÔ¾»º³å
-        coyoteTimeCounter = 0;       // Çå³ıÍÁÀÇÊ±¼ä
-        isJumping = true;            // ±ê¼ÇÎªÌøÔ¾×´Ì¬
-        isFastFalling = false;       // ÖØÖÃ¿ìËÙÏÂÂä×´Ì¬
+        // æ›´æ–°è·³è·ƒçŠ¶æ€
+        currentJumpCount++;          // å¢åŠ è·³è·ƒè®¡æ•°
+        jumpBufferCounter = 0;       // æ¸…é™¤è·³è·ƒç¼“å†²
+        coyoteTimeCounter = 0;       // æ¸…é™¤åœŸç‹¼æ—¶é—´
+        isJumping = true;            // æ ‡è®°ä¸ºè·³è·ƒçŠ¶æ€
+        isFastFalling = false;       // é‡ç½®å¿«é€Ÿä¸‹è½çŠ¶æ€
 
-        // ²¥·ÅÌøÔ¾ÒôĞ§
+        // æ’­æ”¾è·³è·ƒéŸ³æ•ˆ
         if (AudioManager.instance != null)
         {
-            AudioManager.instance.PlaySFX(1); // ¼ÙÉè1ÊÇÌøÔ¾ÒôĞ§µÄË÷Òı
+            AudioManager.instance.PlaySFX(1); // å‡è®¾1æ˜¯è·³è·ƒéŸ³æ•ˆçš„ç´¢å¼•
         }
     }
 
     /// <summary>
-    /// ¼ÆËãµ±Ç°ÌøÔ¾¸ß¶È£¨ÓÃÓÚµ÷ÊÔ»òUIÏÔÊ¾£©
+    /// è®¡ç®—å½“å‰è·³è·ƒé«˜åº¦ï¼ˆç”¨äºè°ƒè¯•æˆ–UIæ˜¾ç¤ºï¼‰
     /// </summary>
-    /// <returns>µ±Ç°ÌøÔ¾¸ß¶È</returns>
+    /// <returns>å½“å‰è·³è·ƒé«˜åº¦</returns>
     private float GetCurrentJumpHeight()
     {
         if (!isJumping) return 0f;
 
-        // Ê¹ÓÃ Clamp ÏŞÖÆ¼ÆËã·¶Î§ÔÚ 0 µ½ maxJumpHeight Ö®¼ä
+        // ä½¿ç”¨ Clamp é™åˆ¶è®¡ç®—èŒƒå›´åœ¨ 0 åˆ° maxJumpHeight ä¹‹é—´
         return Mathf.Clamp(transform.position.y - jumpStartY, 0, maxJumpHeight);
     }
 
-    // ========== ÖØÁ¦ÓëÏÂÂä¿ØÖÆÏµÍ³ ==========
+    // ========== é‡åŠ›ä¸ä¸‹è½æ§åˆ¶ç³»ç»Ÿ ==========
 
     /// <summary>
-    /// ´¦ÀíÖØÁ¦Ó¦ÓÃ£¬ÊµÏÖ×Ô¶¨ÒåÖØÁ¦ÏµÍ³
+    /// å¤„ç†é‡åŠ›åº”ç”¨ï¼Œå®ç°è‡ªå®šä¹‰é‡åŠ›ç³»ç»Ÿ
     /// </summary>
     private void HandleGravity()
     {
-        // »ñÈ¡µ±Ç°ÖØÁ¦ÏµÊı
+        // è·å–å½“å‰é‡åŠ›ç³»æ•°
         float gravityScale = GetCurrentGravityScale();
 
-        // ¼ÆËãÖØÁ¦ÏòÁ¿
+        // è®¡ç®—é‡åŠ›å‘é‡
         Vector3 gravity = Physics.gravity * gravityScale;
 
-        // Ó¦ÓÃÖØÁ¦µ½¸ÕÌåËÙ¶È
-        // ÏÂÂäÊ±Ó¦ÓÃÍêÕûÖØÁ¦£¬ÉÏÉıÊ±Ó¦ÓÃÒ»°ëÖØÁ¦£¨¸ü×ÔÈ»µÄÌøÔ¾»¡Ïß£©
-        if (rb.velocity.y < 0) // ÏÂÂä½×¶Î
+        // åº”ç”¨é‡åŠ›åˆ°åˆšä½“é€Ÿåº¦
+        // ä¸‹è½æ—¶åº”ç”¨å®Œæ•´é‡åŠ›ï¼Œä¸Šå‡æ—¶åº”ç”¨ä¸€åŠé‡åŠ›ï¼ˆæ›´è‡ªç„¶çš„è·³è·ƒå¼§çº¿ï¼‰
+        if (rb.velocity.y < 0) // ä¸‹è½é˜¶æ®µ
         {
             rb.velocity += gravity * Time.fixedDeltaTime;
         }
-        else // ÉÏÉı½×¶Î
+        else // ä¸Šå‡é˜¶æ®µ
         {
             rb.velocity += gravity * Time.fixedDeltaTime * 0.5f;
         }
     }
 
     /// <summary>
-    /// ¸ù¾İ½ÇÉ«×´Ì¬»ñÈ¡µ±Ç°ÖØÁ¦ÏµÊı
-    /// Ê¹ÓÃ Lerp ÊµÏÖÖØÁ¦ÏµÊıµÄÆ½»¬¹ı¶É
+    /// æ ¹æ®è§’è‰²çŠ¶æ€è·å–å½“å‰é‡åŠ›ç³»æ•°
+    /// ä½¿ç”¨ Lerp å®ç°é‡åŠ›ç³»æ•°çš„å¹³æ»‘è¿‡æ¸¡
     /// </summary>
-    /// <returns>µ±Ç°ÖØÁ¦ÏµÊı</returns>
+    /// <returns>å½“å‰é‡åŠ›ç³»æ•°</returns>
     private float GetCurrentGravityScale()
     {
-        if (isFastFalling) // ¿ìËÙÏÂÂä×´Ì¬
+        if (isFastFalling) // å¿«é€Ÿä¸‹è½çŠ¶æ€
         {
-            // Ê¹ÓÃ Lerp ´ÓÆÕÍ¨ÏÂÂäÖØÁ¦Æ½»¬¹ı¶Éµ½¿ìËÙÏÂÂäÖØÁ¦
+            // ä½¿ç”¨ Lerp ä»æ™®é€šä¸‹è½é‡åŠ›å¹³æ»‘è¿‡æ¸¡åˆ°å¿«é€Ÿä¸‹è½é‡åŠ›
             return Mathf.Lerp(fallGravityScale, fastFallGravityScale, 0.8f);
         }
-        else if (rb.velocity.y < 0) // ÆÕÍ¨ÏÂÂä×´Ì¬
+        else if (rb.velocity.y < 0) // æ™®é€šä¸‹è½çŠ¶æ€
         {
-            // ´ÓÉÏÉıÖØÁ¦Æ½»¬¹ı¶Éµ½ÏÂÂäÖØÁ¦
+            // ä»ä¸Šå‡é‡åŠ›å¹³æ»‘è¿‡æ¸¡åˆ°ä¸‹è½é‡åŠ›
             return Mathf.Lerp(riseGravityScale, fallGravityScale, 0.5f);
         }
-        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space)) // Ğ¡Ìø×´Ì¬
+        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space)) // å°è·³çŠ¶æ€
         {
-            // Ó¦ÓÃĞ¡ÌøÖØÁ¦ÏµÊı£¬ÊµÏÖ¿ìËÙÏÂÂä
+            // åº”ç”¨å°è·³é‡åŠ›ç³»æ•°ï¼Œå®ç°å¿«é€Ÿä¸‹è½
             return Mathf.Lerp(riseGravityScale, lowJumpMultiplier, 0.7f);
         }
-        else // Õı³£ÉÏÉı×´Ì¬
+        else // æ­£å¸¸ä¸Šå‡çŠ¶æ€
         {
             return riseGravityScale;
         }
     }
 
     /// <summary>
-    /// ÏŞÖÆÏÂÂäËÙ¶È£¬·ÀÖ¹ÏÂÂä¹ı¿ì
-    /// Ê¹ÓÃ Clamp È·±£ËÙ¶ÈÔÚºÏÀí·¶Î§ÄÚ
+    /// é™åˆ¶ä¸‹è½é€Ÿåº¦ï¼Œé˜²æ­¢ä¸‹è½è¿‡å¿«
+    /// ä½¿ç”¨ Clamp ç¡®ä¿é€Ÿåº¦åœ¨åˆç†èŒƒå›´å†…
     /// </summary>
     private void ClampFallSpeed()
     {
-        // Ê¹ÓÃ Mathf.Clamp ÏŞÖÆYÖáËÙ¶È²»µÍÓÚ×î´óÏÂÂäËÙ¶È
-        // µÚÒ»¸ö²ÎÊı£ºÒªÏŞÖÆµÄÖµ£¨µ±Ç°YËÙ¶È£©
-        // µÚ¶ş¸ö²ÎÊı£º×îĞ¡Öµ£¨×î´óÏÂÂäËÙ¶È£¬Îª¸ºÖµ£©
-        // µÚÈı¸ö²ÎÊı£º×î´óÖµ£¨ÎŞÇî´ó£¬²»ÏŞÖÆÉÏÉıËÙ¶È£©
+        // ä½¿ç”¨ Mathf.Clamp é™åˆ¶Yè½´é€Ÿåº¦ä¸ä½äºæœ€å¤§ä¸‹è½é€Ÿåº¦
+        // ç¬¬ä¸€ä¸ªå‚æ•°ï¼šè¦é™åˆ¶çš„å€¼ï¼ˆå½“å‰Yé€Ÿåº¦ï¼‰
+        // ç¬¬äºŒä¸ªå‚æ•°ï¼šæœ€å°å€¼ï¼ˆæœ€å¤§ä¸‹è½é€Ÿåº¦ï¼Œä¸ºè´Ÿå€¼ï¼‰
+        // ç¬¬ä¸‰ä¸ªå‚æ•°ï¼šæœ€å¤§å€¼ï¼ˆæ— ç©·å¤§ï¼Œä¸é™åˆ¶ä¸Šå‡é€Ÿåº¦ï¼‰
         float clampedYVelocity = Mathf.Clamp(rb.velocity.y, maxFallSpeed, Mathf.Infinity);
 
-        // Ó¦ÓÃÏŞÖÆºóµÄËÙ¶È
+        // åº”ç”¨é™åˆ¶åçš„é€Ÿåº¦
         rb.velocity = new Vector3(rb.velocity.x, clampedYVelocity, rb.velocity.z);
 
-        // ÏŞÖÆ×î´óÌøÔ¾¸ß¶È
-        // µ±ÌøÔ¾¸ß¶È³¬¹ıÏŞÖÆÇÒÈÔÔÚÉÏÉıÊ±£¬Á¢¼´Í£Ö¹ÉÏÉı
+        // é™åˆ¶æœ€å¤§è·³è·ƒé«˜åº¦
+        // å½“è·³è·ƒé«˜åº¦è¶…è¿‡é™åˆ¶ä¸”ä»åœ¨ä¸Šå‡æ—¶ï¼Œç«‹å³åœæ­¢ä¸Šå‡
         if (isJumping && transform.position.y - jumpStartY >= maxJumpHeight && rb.velocity.y > 0)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         }
     }
 
-    // ========== Åö×²¼ì²âÓë¶¯»­ÏµÍ³ ==========
+    // ========== ç¢°æ’æ£€æµ‹ä¸åŠ¨ç”»ç³»ç»Ÿ ==========
 
     /// <summary>
-    /// µØÃæ¼ì²â£¬Ê¹ÓÃÉäÏß¼ì²âÅĞ¶ÏÊÇ·ñÔÚµØÃæÉÏ
+    /// åœ°é¢æ£€æµ‹ï¼Œä½¿ç”¨å°„çº¿æ£€æµ‹åˆ¤æ–­æ˜¯å¦åœ¨åœ°é¢ä¸Š
     /// </summary>
     private void GroundCheck()
     {
-        bool wasGround = isGround; // ¼ÇÂ¼Ö®Ç°µÄµØÃæ×´Ì¬
+        bool wasGround = isGround; // è®°å½•ä¹‹å‰çš„åœ°é¢çŠ¶æ€
 
-        // ´Ó½ÇÉ«Î»ÖÃÏòÏÂ·¢ÉäÉäÏß¼ì²âµØÃæ
+        // ä»è§’è‰²ä½ç½®å‘ä¸‹å‘å°„å°„çº¿æ£€æµ‹åœ°é¢
         isGround = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, whatIsGround);
 
-        // ÂäµØ¼ì²â£º´Ó¿ÕÖĞÂäµ½µØÃæÊ±´¥·¢
+        // è½åœ°æ£€æµ‹ï¼šä»ç©ºä¸­è½åˆ°åœ°é¢æ—¶è§¦å‘
         if (!wasGround && isGround && rb.velocity.y <= 0)
         {
-            OnLand(); // µ÷ÓÃÂäµØ´¦Àí
+            OnLand(); // è°ƒç”¨è½åœ°å¤„ç†
         }
     }
 
     /// <summary>
-    /// ÂäµØÊ±µÄ´¦Àíº¯Êı
+    /// è½åœ°æ—¶çš„å¤„ç†å‡½æ•°
     /// </summary>
     private void OnLand()
     {
-        // ¸ù¾İÏÂÂäËÙ¶È²¥·Å²»Í¬µÄÂäµØÒôĞ§
+        // æ ¹æ®ä¸‹è½é€Ÿåº¦æ’­æ”¾ä¸åŒçš„è½åœ°éŸ³æ•ˆ
         if (AudioManager.instance != null && rb.velocity.y < -5f)
         {
-            AudioManager.instance.PlaySFX(2); // ¼ÙÉè2ÊÇÂäµØÒôĞ§µÄË÷Òı
+            AudioManager.instance.PlaySFX(2); // å‡è®¾2æ˜¯è½åœ°éŸ³æ•ˆçš„ç´¢å¼•
         }
     }
 
     /// <summary>
-    /// ¸üĞÂ¶¯»­×´Ì¬ºÍ²ÎÊı
-    /// Ê¹ÓÃ Lerp ÊµÏÖ¶¯»­²ÎÊıµÄÆ½»¬¹ı¶É
+    /// æ›´æ–°åŠ¨ç”»çŠ¶æ€å’Œå‚æ•°
+    /// ä½¿ç”¨ Lerp å®ç°åŠ¨ç”»å‚æ•°çš„å¹³æ»‘è¿‡æ¸¡
     /// </summary>
     private void UpdateAnimations()
     {
-        // ÅĞ¶ÏÊÇ·ñÔÚÒÆ¶¯£¨Ë®Æ½ËÙ¶È´óÓÚãĞÖµ£©
+        // åˆ¤æ–­æ˜¯å¦åœ¨ç§»åŠ¨ï¼ˆæ°´å¹³é€Ÿåº¦å¤§äºé˜ˆå€¼ï¼‰
         isMoving = Mathf.Abs(currentHorizontalSpeed) > 0.1f;
 
-        // Ê¹ÓÃ Lerp Æ½»¬¹ı¶É¶¯»­ËÙ¶È²ÎÊı
-        // ´Óµ±Ç°¶¯»­ÖµÆ½»¬¹ı¶Éµ½Ä¿±êÖµ£¬±ÜÃâ¶¯»­Í»±ä
+        // ä½¿ç”¨ Lerp å¹³æ»‘è¿‡æ¸¡åŠ¨ç”»é€Ÿåº¦å‚æ•°
+        // ä»å½“å‰åŠ¨ç”»å€¼å¹³æ»‘è¿‡æ¸¡åˆ°ç›®æ ‡å€¼ï¼Œé¿å…åŠ¨ç”»çªå˜
         float smoothedSpeed = Mathf.Lerp(anime.GetFloat("Speed"), Mathf.Abs(xInput), 5f * Time.deltaTime);
 
-        // ÉèÖÃ¶¯»­²ÎÊı
-        anime.SetFloat("Speed", smoothedSpeed);        // ÒÆ¶¯ËÙ¶È£¨Æ½»¬ºó£©
-        anime.SetBool("isMoving", isMoving);           // ÊÇ·ñÔÚÒÆ¶¯
-        anime.SetBool("isGround", isGround);           // ÊÇ·ñÔÚµØÃæ
-        anime.SetFloat("yVelocity", rb.velocity.y);    // YÖáËÙ¶È£¨ÓÃÓÚÌøÔ¾/ÏÂÂä¶¯»­£©
-        anime.SetInteger("jumpCount", currentJumpCount); // ÌøÔ¾´ÎÊı
-        anime.SetBool("isFastFalling", isFastFalling); // ÊÇ·ñ¿ìËÙÏÂÂä
+        // è®¾ç½®åŠ¨ç”»å‚æ•°
+        anime.SetFloat("Speed", smoothedSpeed);        // ç§»åŠ¨é€Ÿåº¦ï¼ˆå¹³æ»‘åï¼‰
+        anime.SetBool("isMoving", isMoving);           // æ˜¯å¦åœ¨ç§»åŠ¨
+        anime.SetBool("isGround", isGround);           // æ˜¯å¦åœ¨åœ°é¢
+        anime.SetFloat("yVelocity", rb.velocity.y);    // Yè½´é€Ÿåº¦ï¼ˆç”¨äºè·³è·ƒ/ä¸‹è½åŠ¨ç”»ï¼‰
+        anime.SetInteger("jumpCount", currentJumpCount); // è·³è·ƒæ¬¡æ•°
+        anime.SetBool("isFastFalling", isFastFalling); // æ˜¯å¦å¿«é€Ÿä¸‹è½
     }
 
-    // ========== µ÷ÊÔÓë¿ÉÊÓ»¯ ==========
+    // ========== è°ƒè¯•ä¸å¯è§†åŒ– ==========
 
     /// <summary>
-    /// ÔÚSceneÊÓÍ¼ÖĞ»æÖÆµ÷ÊÔÍ¼ĞÎ
+    /// åœ¨Sceneè§†å›¾ä¸­ç»˜åˆ¶è°ƒè¯•å›¾å½¢
     /// </summary>
     private void OnDrawGizmos()
     {
-        // »æÖÆµØÃæ¼ì²âÏß
-        // ÔÚµØÃæÉÏÏÔÊ¾ÂÌÉ«£¬ÔÚ¿ÕÖĞÏÔÊ¾ºìÉ«
+        // ç»˜åˆ¶åœ°é¢æ£€æµ‹çº¿
+        // åœ¨åœ°é¢ä¸Šæ˜¾ç¤ºç»¿è‰²ï¼Œåœ¨ç©ºä¸­æ˜¾ç¤ºçº¢è‰²
         Gizmos.color = isGround ? Color.green : Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
 
-        // ÔÚÓÎÏ·ÔËĞĞÊ±»æÖÆÌøÔ¾¸ß¶È¿ÉÊÓ»¯
+        // åœ¨æ¸¸æˆè¿è¡Œæ—¶ç»˜åˆ¶è·³è·ƒé«˜åº¦å¯è§†åŒ–
         if (Application.isPlaying && isJumping)
         {
             Gizmos.color = Color.yellow;
             float currentHeight = GetCurrentJumpHeight();
 
-            // »æÖÆÌøÔ¾¸ß¶È¿ò
+            // ç»˜åˆ¶è·³è·ƒé«˜åº¦æ¡†
             Gizmos.DrawWireCube(
-                transform.position + Vector3.up * (currentHeight * 0.5f), // ÖĞĞÄÎ»ÖÃ
-                new Vector3(0.5f, currentHeight, 0.5f)                   // ´óĞ¡
+                transform.position + Vector3.up * (currentHeight * 0.5f), // ä¸­å¿ƒä½ç½®
+                new Vector3(0.5f, currentHeight, 0.5f)                   // å¤§å°
             );
         }
     }
 
     /// <summary>
-    /// ÔÚGameÊÓÍ¼ÖĞÏÔÊ¾µ÷ÊÔĞÅÏ¢
+    /// åœ¨Gameè§†å›¾ä¸­æ˜¾ç¤ºè°ƒè¯•ä¿¡æ¯
     /// </summary>
     private void OnGUI()
     {
         if (!Application.isPlaying) return;
 
-        // ´´½¨µ÷ÊÔĞÅÏ¢ÏÔÊ¾ÇøÓò
+        // åˆ›å»ºè°ƒè¯•ä¿¡æ¯æ˜¾ç¤ºåŒºåŸŸ
         GUILayout.BeginArea(new Rect(10, 10, 300, 200));
-        GUILayout.Label($"Y Velocity: {rb.velocity.y:F2}");          // YÖáËÙ¶È
-        GUILayout.Label($"Jump Count: {currentJumpCount}/{maxJumpCount}"); // ÌøÔ¾¼ÆÊı
-        GUILayout.Label($"Grounded: {isGround}");                    // µØÃæ×´Ì¬
-        GUILayout.Label($"Coyote Time: {coyoteTimeCounter:F2}");     // ÍÁÀÇÊ±¼ä
-        GUILayout.Label($"Jump Buffer: {jumpBufferCounter:F2}");     // ÌøÔ¾»º³å
-        GUILayout.Label($"Fast Falling: {isFastFalling}");           // ¿ìËÙÏÂÂä
+        GUILayout.Label($"Y Velocity: {rb.velocity.y:F2}");          // Yè½´é€Ÿåº¦
+        GUILayout.Label($"Jump Count: {currentJumpCount}/{maxJumpCount}"); // è·³è·ƒè®¡æ•°
+        GUILayout.Label($"Grounded: {isGround}");                    // åœ°é¢çŠ¶æ€
+        GUILayout.Label($"Coyote Time: {coyoteTimeCounter:F2}");     // åœŸç‹¼æ—¶é—´
+        GUILayout.Label($"Jump Buffer: {jumpBufferCounter:F2}");     // è·³è·ƒç¼“å†²
+        GUILayout.Label($"Fast Falling: {isFastFalling}");           // å¿«é€Ÿä¸‹è½
         GUILayout.EndArea();
     }
 }
