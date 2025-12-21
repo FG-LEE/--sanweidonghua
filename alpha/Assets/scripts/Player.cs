@@ -52,6 +52,18 @@ public class Player : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 0.1f; // 地面检测距离
     private bool isGround;                 // 是否在地面上
 
+    // ========== 墙壁滑行相关变量 ==========
+    [Header("Wall Slide Settings")]
+    [SerializeField] private LayerMask whatIsWall;            // 墙壁层级掩码
+    [SerializeField] private float wallCheckDistance = 0.5f;  // 墙壁检测距离
+    [SerializeField] private float wallSlideSpeed = 2f;       // 墙壁滑行速度
+    [SerializeField] private float wallJumpForce = 10f;       // 墙壁跳跃力度
+    [SerializeField] private Vector2 wallJumpDirection = new Vector2(1f, 1.5f); // 墙壁跳跃方向
+    private bool isTouchingWall;           // 是否接触墙壁
+    private bool isWallSliding;            // 是否正在墙壁滑行
+    private bool isTouchingRightWall;      // 是否接触右侧墙壁
+    private bool isTouchingLeftWall;       // 是否接触左侧墙壁
+    private bool wallSlideInput;           // 墙壁滑行输入标志
 
     // ========== 生命周期方法 ==========
 
@@ -95,8 +107,10 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         GroundCheck();          // 地面碰撞检测
+        WallCheck();            // 墙壁碰撞检测
         HandleMovement();       // 处理移动逻辑
         HandleJump();           // 处理跳跃逻辑
+        HandleWallSlide();      // 处理墙壁滑行逻辑
         HandleGravity();        // 应用自定义重力
         HandleFallSpeed();      // 处理下落速度
         FlipController();       // 控制角色翻转
@@ -111,10 +125,27 @@ public class Player : MonoBehaviour
     private void GetInput()
     {
         // 获取水平输入，返回值在 -1（左）到 1（右）之间
+        float previousInput = xInput;
         xInput = Input.GetAxisRaw("Horizontal");
-        if(Mathf.Abs(xInput)>0)
+        bool wasMoving = Mathf.Abs(previousInput) > 0.1f;
+        bool isMovingNow = Mathf.Abs(xInput) > 0.1f;
+        // 开始移动时播放音效
+        if (!wasMoving && isMovingNow)
+        {
             AudioManager.instance.PlaySFX(0);
-        
+        }
+        // 停止移动时停止音效
+        else if (wasMoving && !isMovingNow)
+        {
+            AudioManager.instance.StopSFX(0);
+        }
+
+        // 检测墙壁滑行输入（按下方向键朝向墙壁）
+        bool rightWallInput = (xInput > 0);
+        bool leftWallInput = (xInput < 0);
+
+        wallSlideInput = (isTouchingRightWall && rightWallInput) ||
+                         (isTouchingLeftWall && leftWallInput);
     }
 
     /// <summary>
@@ -147,7 +178,15 @@ public class Player : MonoBehaviour
         // 检测跳跃键按下，设置跳跃缓冲
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            jumpBufferCounter = jumpBufferTime;
+            // 墙壁跳跃检测
+            if (isWallSliding)
+            {
+                ExecuteWallJump();
+            }
+            else
+            {
+                jumpBufferCounter = jumpBufferTime;
+            }
         }
 
         // 检测快速下落输入（按下S键或下方向键）
@@ -174,6 +213,14 @@ public class Player : MonoBehaviour
     /// </summary>
     private void HandleMovement()
     {
+        // 墙壁滑行时限制水平移动
+        if (isWallSliding)
+        {
+            // 墙壁滑行时保持水平速度为零，只允许垂直滑行
+            rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
+            return;
+        }
+
         // 直接计算水平速度，没有平滑过渡
         float targetSpeed = xInput * moveSpeed;
 
@@ -195,6 +242,9 @@ public class Player : MonoBehaviour
     /// </summary>
     private void FlipController()
     {
+        // 墙壁滑行时不允许翻转
+        if (isWallSliding) return;
+
         // 向右移动且当前面向左时翻转
         if (xInput > 0.1f && !faceRight)
         {
@@ -240,8 +290,8 @@ public class Player : MonoBehaviour
             }
         }
 
-        // 执行跳跃条件检查：跳跃缓冲有效且可以跳跃
-        if (jumpBufferCounter > 0 && CanJump())
+        // 执行跳跃条件检查：跳跃缓冲有效且可以跳跃（墙壁滑行时不允许普通跳跃）
+        if (jumpBufferCounter > 0 && CanJump() && !isWallSliding)
         {
             ExecuteJump(); // 执行跳跃
         }
@@ -300,6 +350,40 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// 执行墙壁跳跃
+    /// </summary>
+    private void ExecuteWallJump()
+    {
+        // 确定墙壁跳跃的方向（远离墙壁）
+        int jumpDirection = isTouchingRightWall ? -1 : 1;
+
+        // 计算墙壁跳跃速度
+        Vector2 jumpVelocity = new Vector2(wallJumpDirection.x * jumpDirection, wallJumpDirection.y);
+        jumpVelocity.Normalize(); // 标准化向量
+        jumpVelocity *= wallJumpForce;
+
+        // 应用墙壁跳跃速度
+        rb.velocity = new Vector3(jumpVelocity.x, jumpVelocity.y, rb.velocity.z);
+
+        // 更新角色朝向
+        if (jumpDirection != faceDir)
+        {
+            Flip();
+        }
+
+        // 重置状态
+        isWallSliding = false;
+        isJumping = true;
+        currentJumpCount = 1; // 墙壁跳跃算作第一段跳跃
+
+        // 播放跳跃音效
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(1);
+        }
+    }
+
+    /// <summary>
     /// 检查每段跳跃的高度限制
     /// </summary>
     private void CheckJumpHeight()
@@ -319,6 +403,60 @@ public class Player : MonoBehaviour
         }
     }
 
+    // ========== 墙壁滑行控制系统 ==========
+
+    /// <summary>
+    /// 墙壁检测，使用3D射线检测判断是否接触墙壁
+    /// </summary>
+    private void WallCheck()
+    {
+        // 3D射线检测右侧墙壁
+        RaycastHit rightHit;
+        isTouchingRightWall = (Physics.Raycast(transform.position + new Vector3(0, 1.6f, 0), Vector3.right, out rightHit, wallCheckDistance, whatIsWall)&&faceRight);
+
+        // 3D射线检测左侧墙壁
+        RaycastHit leftHit;
+        isTouchingLeftWall = (Physics.Raycast(transform.position + new Vector3(0, 1.6f, 0), Vector3.left, out leftHit, wallCheckDistance, whatIsWall)&&!faceRight);
+
+        // 更新墙壁接触状态
+        isTouchingWall = isTouchingRightWall || isTouchingLeftWall;
+
+        // 检查是否应该开始墙壁滑行（按下触发模式）
+        if (!isGround && isTouchingWall && !isWallSliding && wallSlideInput)
+        {
+            isWallSliding = true;
+        }
+
+        // 检查是否应该结束墙壁滑行（落地或离开墙壁时自动结束）
+        if (isWallSliding)
+        {
+            bool shouldStopWallSlide = isGround || !isTouchingWall;
+
+            if (shouldStopWallSlide)
+            {
+                isWallSliding = false;
+            }
+        }
+
+        // 重置墙壁滑行输入标志（确保只触发一次）
+        wallSlideInput = false;
+    }
+
+    /// <summary>
+    /// 处理墙壁滑行逻辑
+    /// </summary>
+    private void HandleWallSlide()
+    {
+        if (isWallSliding)
+        {
+            // 限制下落速度为墙壁滑行速度
+            if (rb.velocity.y < -wallSlideSpeed)
+            {
+                rb.velocity = new Vector3(rb.velocity.x, -wallSlideSpeed, rb.velocity.z);
+            }
+        }
+    }
+
     // ========== 重力与下落控制系统 ==========
 
     /// <summary>
@@ -326,12 +464,22 @@ public class Player : MonoBehaviour
     /// </summary>
     private void HandleGravity()
     {
+        // 墙壁滑行时使用较小的重力
+        if (isWallSliding)
+        {
+            // 墙壁滑行时使用较小的重力系数
+            float wallSlideGravityScale = 0.5f;
+            Vector3 wallSlideGravity = Physics.gravity * wallSlideGravityScale;
+            rb.velocity += wallSlideGravity * Time.fixedDeltaTime;
+            return;
+        }
+
         // 获取当前重力系数
         float gravityScale = GetCurrentGravityScale();
 
         // 计算重力向量并应用
-        Vector3 gravity = Physics.gravity * gravityScale;
-        rb.velocity += gravity * Time.fixedDeltaTime;
+        Vector3 normalGravity = Physics.gravity * gravityScale;
+        rb.velocity += normalGravity * Time.fixedDeltaTime;
     }
 
     /// <summary>
@@ -359,6 +507,9 @@ public class Player : MonoBehaviour
     /// </summary>
     private void HandleFallSpeed()
     {
+        // 墙壁滑行时已经有速度限制，跳过最大下落速度检查
+        if (isWallSliding) return;
+
         // 如果下落速度超过最大限制，直接设置为最大下落速度
         if (rb.velocity.y < maxFallSpeed)
         {
@@ -369,14 +520,15 @@ public class Player : MonoBehaviour
     // ========== 碰撞检测与动画系统 ==========
 
     /// <summary>
-    /// 地面检测，使用射线检测判断是否在地面上
+    /// 地面检测，使用3D射线检测判断是否在地面上
     /// </summary>
     private void GroundCheck()
     {
         bool wasGround = isGround; // 记录之前的地面状态
 
-        // 从角色位置向下发射射线检测地面
-        isGround = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, whatIsGround);
+        // 从角色位置向下发射3D射线检测地面
+        RaycastHit hit;
+        isGround = Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance, whatIsGround);
 
         // 落地检测：从空中落到地面时触发
         if (!wasGround && isGround && rb.velocity.y <= 0)
@@ -409,6 +561,8 @@ public class Player : MonoBehaviour
         anime.SetFloat("Speed", Mathf.Abs(xInput));  // 移动速度（直接使用输入值）
         anime.SetBool("isMoving", isMoving);         // 是否在移动
         anime.SetBool("isGround", isGround);         // 是否在地面
+        anime.SetBool("isWallSliding", isWallSliding); // 是否在墙壁滑行
+        anime.SetFloat("ySpeed", rb.velocity.y);
     }
 
     // ========== 调试与可视化 ==========
@@ -421,5 +575,10 @@ public class Player : MonoBehaviour
         // 绘制地面检测线
         Gizmos.color = isGround ? Color.green : Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
+
+        // 绘制墙壁检测线
+        Gizmos.color = isTouchingWall ? Color.blue : Color.white;
+        Gizmos.DrawLine(transform.position + new Vector3(0, 1.6f, 0), transform.position + new Vector3(0, 1.6f, 0) + Vector3.right * wallCheckDistance);
+        Gizmos.DrawLine(transform.position + new Vector3(0, 1.6f, 0), transform.position + new Vector3(0, 1.6f, 0) + Vector3.left * wallCheckDistance);
     }
 }
