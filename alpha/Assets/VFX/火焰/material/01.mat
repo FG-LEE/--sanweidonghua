@@ -184,7 +184,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _mask:
-        m_Texture: {fileID: 2800000, guid: 052173b9b11b8cd4e961bd6aacb9797d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 699f6680a88c8ab488539d802833358b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _noise:
@@ -506,7 +506,7 @@ Material:
     - _fnl_sacle: 0
     - _fresnelmode: 0
     - _fresnelpower: 3
-    - _fresnelscale: 1
+    - _fresnelscale: 2.6
     - _group_base: 0
     - _group_color: 0
     - _group_depthfade: 0
@@ -523,7 +523,7 @@ Material:
     - _group_subtex: 0
     - _group_vertex: 0
     - _group_vertexmask: 0
-    - _invertfresnel: 0
+    - _invertfresnel: 1
     - _lightarea: -0.8
     - _lightscale: 0.5
     - _lightsoft: 0
@@ -606,7 +606,7 @@ Material:
     - _stencil_reference: 0
     - _texblendalphaswitch: 3
     - _texblendmode: 3
-    - _toggle_fresnel: 0
+    - _toggle_fresnel: 1
     - _toggle_matcao: 0
     - _toggle_parallax: 0
     - _toggle_ref: 0
@@ -638,7 +638,7 @@ Material:
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _MainTexRefine: {r: 1, g: 1, b: 2, a: 0}
     - _TexCenter: {r: 0, g: 0, b: 0, a: 0}
-    - _color_main: {r: 2, g: 2, b: 2, a: 1}
+    - _color_main: {r: 1.9999999, g: 1.9999999, b: 1.9999999, a: 1}
     - _depthcolor: {r: 1, g: 1, b: 1, a: 1}
     - _edgecolor: {r: 1, g: 1, b: 1, a: 1}
     - _fnl_color: {r: 1, g: 1, b: 1, a: 0}
