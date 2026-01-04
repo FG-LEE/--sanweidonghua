@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
     private float xInput;                   // 水平输入值 (-1, 0, 1)
     private int faceDir = 1;                // 面向方向 (1:右, -1:左)
     private bool faceRight = true;          // 是否面向右侧
-    private bool isPlayingFootstep = false; // 是否正在播放脚步声
 
     // ========== 跳跃相关变量 ==========
     [Header("Jump Settings")]
@@ -130,33 +129,15 @@ public class Player : MonoBehaviour
         xInput = Input.GetAxisRaw("Horizontal");
         bool wasMoving = Mathf.Abs(previousInput) > 0.1f;
         bool isMovingNow = Mathf.Abs(xInput) > 0.1f;
-
-        // 检查是否在地面上
-        bool canPlayFootstep = isGround && !isWallSliding;
-
-        // 开始移动且在地面上时播放音效
-        if (!wasMoving && isMovingNow && canPlayFootstep)
+        // 开始移动时播放音效
+        if (!wasMoving && isMovingNow)
         {
             AudioManager.instance.PlaySFX(0);
-            isPlayingFootstep = true;
-        }
-        // 持续移动且在地面上时：如果之前没在播放，开始播放
-        else if (isMovingNow && canPlayFootstep && !isPlayingFootstep)
-        {
-            AudioManager.instance.PlaySFX(0);
-            isPlayingFootstep = true;
         }
         // 停止移动时停止音效
-        else if (wasMoving && !isMovingNow && isPlayingFootstep)
+        else if (wasMoving && !isMovingNow)
         {
             AudioManager.instance.StopSFX(0);
-            isPlayingFootstep = false;
-        }
-        // 离开地面时停止音效
-        else if (!canPlayFootstep && isPlayingFootstep)
-        {
-            AudioManager.instance.StopSFX(0);
-            isPlayingFootstep = false;
         }
 
         // 检测墙壁滑行输入（按下方向键朝向墙壁）
