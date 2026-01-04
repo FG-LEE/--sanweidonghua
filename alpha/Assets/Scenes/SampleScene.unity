@@ -4947,6 +4947,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vfxLibrary:
   - {fileID: 4951651143080066880, guid: b5a2d67b111cc9249bc64ac048e26c05, type: 3}
+  - {fileID: 3467300324579487262, guid: 6c1fcb7e3c1b7a44e9b6dde8f3279a36, type: 3}
+  - {fileID: 4637482617118045676, guid: d4ffeba6367324347b20e5b736d2b68f, type: 3}
   vfxMinimumDistance: 10
 --- !u!4 &439549181
 Transform:
@@ -6968,7 +6970,7 @@ Transform:
   m_GameObject: {fileID: 630949390}
   serializedVersion: 2
   m_LocalRotation: {x: 0.07641316, y: -0.017711258, z: 0.0013725533, w: 0.996918}
-  m_LocalPosition: {x: -0.41556978, y: -0.8161882, z: -0.03438902}
+  m_LocalPosition: {x: -0.85607743, y: -0.8162013, z: -0.05004692}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10673,7 +10675,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.07641316, y: -0.017711258, z: 0.0013725533, w: 0.996918}
-  m_LocalPosition: {x: -0.41556978, y: -0.8161882, z: -0.03438902}
+  m_LocalPosition: {x: -0.85607743, y: -0.8162013, z: -0.05004692}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

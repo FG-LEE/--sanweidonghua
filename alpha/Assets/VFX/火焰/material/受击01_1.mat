@@ -1,0 +1,405 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: "\u53D7\u51FB01_1"
+  m_Shader: {fileID: 4800000, guid: 33a9ffdb9696c7f41a105e45d9ee8986, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _0
+  - _1
+  - _2
+  - _CUSTOMDISSOFT_CUSTOM2X
+  - _CUSTOMDISX_CUSTOM1X
+  - _CUSTOMDISY_CUSTOM1Y
+  - _CUSTOMDIS_CUSTOM2X
+  - _CUSTOMFLOWMAP_CUSTOM1X
+  - _CUSTOMMAINX_CUSTOM1X
+  - _CUSTOMMAINY_CUSTOM1Y
+  - _CUSTOMMASKX_CUSTOM1X
+  - _CUSTOMMASKY_CUSTOM1Y
+  - _CUSTOMNOISEMASKX_CUSTOM1X
+  - _CUSTOMNOISEMASKY_CUSTOM1Y
+  - _CUSTOMNOISEX_CUSTOM1X
+  - _CUSTOMNOISEY_CUSTOM1Y
+  - _CUSTOMNORMALX_CUSTOM1X
+  - _CUSTOMNORMALY_CUSTOM1Y
+  - _CUSTOMNORMAL_SCALE_CUSTOM1X
+  - _CUSTOMSUBX_CUSTOM1X
+  - _CUSTOMSUBY_CUSTOM1Y
+  - _CUSTOMVERTEXMASKX_CUSTOM1X
+  - _CUSTOMVERTEXMASKY_CUSTOM1Y
+  - _CUSTOMVERTEXSCALE_CUSTOM1X
+  - _CUSTOMVERTEXX_CUSTOM1X
+  - _CUSTOMVERTEXY_CUSTOM1Y
+  - _CUSTOM_NOISES_CUSTOM1X
+  - _TEXBLENDALPHASWITCH_MULTIPLY
+  - _TEXBLENDMODE_MULTIPLY
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cubemap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Matcap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _dis:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _disdir:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _flowmap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _maintex:
+        m_Texture: {fileID: 2800000, guid: 95ef4804fe0be4c999ddaa383536cde8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _mask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _noise:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _noisemask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _normalmap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _parallaxmap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ramptex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _subtex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _vertex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _vertexmask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha: 1
+    - _AlphaClamp: 1
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _Depthfade_distance: 0
+    - _Depthfade_invertpower: 1
+    - _Depthfade_invertscale: 1
+    - _Depthfadeinvert_toggle: 0
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _Float19: 0
+    - _Float9: 0.5
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    - _alpha_dis: 1
+    - _alpha_maintex: 0
+    - _alpha_mask: 0
+    - _alpha_noise: 2
+    - _alpha_noisemask: 2
+    - _alpha_subtex: 0
+    - _alpha_vertex: 1
+    - _alpha_vertexmask: 1
+    - _alphatoogle_dis: 0
+    - _blend: 1
+    - _blendmode: 10
+    - _camDepthfade_distance1: 0
+    - _camDepthfade_offset: 0
+    - _clampx_dis: 0
+    - _clampx_maintex: 0
+    - _clampx_mask: 0
+    - _clampx_noise: 0
+    - _clampx_noisemask: 0
+    - _clampx_normal: 0
+    - _clampx_subtex: 0
+    - _clampx_vertex: 0
+    - _clampx_vertexmask: 0
+    - _clampy_dis: 0
+    - _clampy_maintex: 0
+    - _clampy_mask: 0
+    - _clampy_noise: 0
+    - _clampy_noisemask: 0
+    - _clampy_normal: 0
+    - _clampy_subtex: 0
+    - _clampy_vertex: 0
+    - _clampy_vertexmask: 0
+    - _color_scale: 1
+    - _colormask: 15
+    - _cube_scale: 0
+    - _cullmodeaaaa: 0
+    - _custom_noises: 0
+    - _customdis: 4
+    - _customdissoft: 4
+    - _customdisx: 0
+    - _customdisy: 1
+    - _customflowmap: 0
+    - _custommainx: 0
+    - _custommainy: 1
+    - _custommaskx: 0
+    - _custommasky: 1
+    - _customnoisemaskx: 0
+    - _customnoisemasky: 1
+    - _customnoisex: 0
+    - _customnoisey: 1
+    - _customnormal_scale: 0
+    - _customnormalx: 0
+    - _customnormaly: 1
+    - _customsubx: 0
+    - _customsuby: 1
+    - _customtoogle_dis: 0
+    - _customtoogle_disoffset: 0
+    - _customtoogle_dissoft: 0
+    - _customtoogle_flowmap: 0
+    - _customtoogle_mainoffset: 0
+    - _customtoogle_maskoffset: 0
+    - _customtoogle_noisemaskoffset: 0
+    - _customtoogle_noiseoffset: 0
+    - _customtoogle_noisescale: 0
+    - _customtoogle_normal: 0
+    - _customtoogle_normaloffset: 0
+    - _customtoogle_suboffset: 0
+    - _customtoogle_vertexmaskoffset: 0
+    - _customtoogle_vertexoffset: 0
+    - _customtoogle_vertexscale: 0
+    - _customvertexmaskx: 0
+    - _customvertexmasky: 1
+    - _customvertexscale: 0
+    - _customvertexx: 0
+    - _customvertexy: 1
+    - _desature: 0
+    - _dis_clip: 0
+    - _dis_s: 0
+    - _disdir_blend: 0
+    - _edge: 0
+    - _flowmap_intensity: 0
+    - _flowmaptoggle_dis: 0
+    - _flowmaptoggle_disdir: 0
+    - _flowmaptoggle_main: 0
+    - _flowmaptoggle_mask: 0
+    - _flowmaptoggle_noise: 0
+    - _flowmaptoggle_noisemask: 0
+    - _flowmaptoggle_sub: 0
+    - _fresnelmode: 0
+    - _fresnelpower: 3
+    - _fresnelscale: 1
+    - _group_base: 0
+    - _group_color: 0
+    - _group_depthfade: 0
+    - _group_dis: 0
+    - _group_flowmap: 0
+    - _group_fresnel: 0
+    - _group_maintex: 0
+    - _group_mask: 0
+    - _group_matcap: 0
+    - _group_noise: 0
+    - _group_noisemask: 0
+    - _group_normal: 0
+    - _group_parallax: 0
+    - _group_subtex: 0
+    - _group_vertex: 0
+    - _group_vertexmask: 0
+    - _invertfresnel: 0
+    - _lightarea: -0.8
+    - _lightscale: 0.5
+    - _lightsoft: 0
+    - _loopflow_speed: 0.3
+    - _loopflow_strength: 0.3
+    - _matcap_scale: 0
+    - _matcapdesature: 0
+    - _noise_intensity_dis: 0
+    - _noise_intensity_main: 0
+    - _noise_intensity_mask: 0
+    - _noise_intensity_screen: 0
+    - _noise_intensity_sub: 0
+    - _noisemaskmode: 0
+    - _noraml_scale: 0
+    - _normalnoise_toggle: 0
+    - _offset: 1
+    - _parallax_scale: 0
+    - _polar_dis: 0
+    - _polar_disdir: 0
+    - _polar_maintex: 0
+    - _polar_mask: 0
+    - _polar_noise: 0
+    - _polar_noisemask: 0
+    - _polar_normal: 0
+    - _polar_subtex: 0
+    - _polar_veretx: 0
+    - _polar_veretxmask: 0
+    - _posterize: 0
+    - _posterize_dis: 0
+    - _posterize_mask: 0
+    - _posterize_noise: 0
+    - _posterize_noisemask: 0
+    - _posterize_subtex: 0
+    - _posterize_vertex: 0
+    - _posterize_vertexmask: 0
+    - _posterizetoogle_dis: 0
+    - _posterizetoogle_maintex: 0
+    - _posterizetoogle_mask: 0
+    - _posterizetoogle_noise: 0
+    - _posterizetoogle_noisemask: 0
+    - _posterizetoogle_subtex: 0
+    - _posterizetoogle_vertex: 0
+    - _posterizetoogle_vertexmask: 0
+    - _rampspeed: 0
+    - _ramptoggle_a: 0
+    - _ramptoggle_rgb: 0
+    - _refiene_intensity: 1
+    - _refiene_power: 1
+    - _refine_lerp: 0
+    - _rotate_dis: 0
+    - _rotate_disdir: 0
+    - _rotate_maintex: 0
+    - _rotate_mask: 0
+    - _rotate_noise: 0
+    - _rotate_noisemask: 0
+    - _rotate_normal: 0
+    - _rotate_subtex: 0
+    - _rotate_vertex: 0
+    - _rotate_vertexmask: 0
+    - _scale_Mask: 1
+    - _scale_dis: 1
+    - _scale_maintex: 1
+    - _scale_noise: 1
+    - _scale_noisemask: 1
+    - _scale_normal: 1
+    - _scale_subtex: 1
+    - _scale_vertex: 1
+    - _scale_vertexmask: 1
+    - _shadow_intensity: 0.5
+    - _shadowarea: 0
+    - _shadowsoft: 0
+    - _stencil_comp: 0
+    - _stencil_pass: 0
+    - _stencil_reference: 0
+    - _texblendalphaswitch: 3
+    - _texblendmode: 3
+    - _toggle_fresnel: 0
+    - _toggle_matcao: 0
+    - _toggle_parallax: 0
+    - _toggle_ref: 0
+    - _toogele_loopflow: 0
+    - _toogele_vertexnormal: 0
+    - _uv_dis: 0
+    - _uv_maintex: 0
+    - _uv_mask: 0
+    - _uv_noise: 0
+    - _uv_noisemask: 0
+    - _uv_normal: 0
+    - _uv_subtex: 0
+    - _uv_vertex: 0
+    - _uv_vertexmask: 0
+    - _veretxmaskmode: 0
+    - _vertexcolor_toggle: 1
+    - _ztest: 4
+    - _zwrite: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorFresnel: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _color_main: {r: 4, g: 4, b: 4, a: 1}
+    - _depthcolor: {r: 1, g: 1, b: 1, a: 1}
+    - _edgecolor: {r: 1, g: 1, b: 1, a: 1}
+    - _parallax_intcolor: {r: 1, g: 1, b: 1, a: 1}
+    - _parallax_outcolor: {r: 0, g: 0, b: 0, a: 1}
+    - _sesan: {r: 0, g: 0, b: 0, a: 0}
+    - _speed_skew_dis: {r: 0, g: 0, b: 0, a: 0}
+    - _speed_skew_maintex: {r: 0, g: 0, b: 0, a: 0}
+    - _speed_skew_mask: {r: 0, g: 0, b: 0, a: 0}
+    - _speed_skew_noise: {r: 0, g: 0, b: 0, a: 0}
+    - _speed_skew_noisemask: {r: 0, g: 0, b: 0, a: 0}
+    - _speed_skew_normal: {r: 0, g: 0, b: 0, a: 0}
+    - _speed_skew_subtex: {r: 0, g: 0, b: 0, a: 0}
+    - _speed_skew_veretx: {r: 0, g: 0, b: 0, a: 0}
+    - _speed_skew_veretxmask: {r: 0, g: 0, b: 0, a: 0}
+    - _veretx_intensity: {r: 0, g: 0, b: 0, a: 0}
+    - _vertex_remap: {r: 0, g: 1, b: 0, a: 1}
+    - _vertex_remapmask: {r: 0, g: 1, b: 0, a: 1}
+  m_BuildTextureStacks: []
