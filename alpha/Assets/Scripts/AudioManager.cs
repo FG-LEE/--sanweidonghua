@@ -85,7 +85,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void StopAllBGM()
+    public void StopAllBGM()
     {
         for (int i = 0; i < bgm.Length; i++)
         {

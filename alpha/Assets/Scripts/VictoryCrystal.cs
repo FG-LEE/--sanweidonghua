@@ -12,6 +12,10 @@ public class VictoryCrystal : MonoBehaviour
     [SerializeField] private AudioClip touchSound; // 触碰音效
     [SerializeField] private float soundVolume = 1f;
 
+    [Header("音频控制")]
+    [SerializeField] private bool stopBGMOnTouch = true; // 触碰时停止背景音乐
+    [SerializeField] private bool pauseBGMOnTouch = false; // 触碰时暂停背景音乐（可选）
+
     private AudioSource audioSource;
     private bool hasBeenTouched = false;
 
@@ -59,6 +63,9 @@ public class VictoryCrystal : MonoBehaviour
     {
         hasBeenTouched = true;
 
+        // 停止背景音乐
+        StopBackgroundMusic();
+
         // 播放音效
         if (touchSound != null && audioSource != null)
         {
@@ -89,6 +96,47 @@ public class VictoryCrystal : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 停止背景音乐
+    /// </summary>
+    void StopBackgroundMusic()
+    {
+        if (!stopBGMOnTouch) return;
+
+        try
+        {
+            // 方法1：直接调用AudioManager的单例
+            if (AudioManager.instance != null)
+            {
+                Debug.Log("通过AudioManager.instance停止BGM");
+                AudioManager.instance.StopAllBGM();
+                AudioManager.instance.playBgm = false; // 确保不会自动重新播放
+            }
+            // 方法2：通过查找对象
+            else
+            {
+                AudioManager audioManager = FindObjectOfType<AudioManager>();
+                if (audioManager != null)
+                {
+                    Debug.Log("通过FindObjectOfType停止BGM");
+                    audioManager.StopAllBGM();
+
+                    // 使用反射设置私有字段（如果playBgm不是public）
+                    var playBgmField = typeof(AudioManager).GetField("playBgm",
+                        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                    if (playBgmField != null)
+                    {
+                        playBgmField.SetValue(audioManager, false);
+                    }
+                }
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning($"停止BGM时出错: {e.Message}");
+        }
+    }
+
     void ShowVictoryScreen()
     {
         Debug.Log("触发通关界面");
@@ -115,6 +163,4 @@ public class VictoryCrystal : MonoBehaviour
             }
         }
     }
-
-    
 }
