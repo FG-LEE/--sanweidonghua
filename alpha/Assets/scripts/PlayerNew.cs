@@ -4,86 +4,86 @@ using UnityEngine;
 
 public class PlayerNew : MonoBehaviour
 {
-    // ×é¼þÒýÓÃ
-    public Rigidbody rb;                    // ¸ÕÌå×é¼þ£¬ÓÃÓÚÎïÀíÔË¶¯
-    [SerializeField] private Animator anime; // ¶¯»­¿ØÖÆÆ÷£¬ÓÃÓÚ½ÇÉ«¶¯»­
-    [SerializeField] private Transform characterModel; // ½ÇÉ«Ä£ÐÍÒýÓÃ
-    private bool isMoving;                  // ÊÇ·ñÕýÔÚÒÆ¶¯µÄ±êÖ¾
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public Rigidbody rb;                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½
+    [SerializeField] private Animator anime; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú½ï¿½É«ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Transform characterModel; // ï¿½ï¿½É«Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private bool isMoving;                  // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Ä±ï¿½Ö¾
 
-    // ========== ÒÆ¶¯Ïà¹Ø±äÁ¿ ==========
+    // ========== ï¿½Æ¶ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ ==========
     [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 8f;        // »ù´¡ÒÆ¶¯ËÙ¶È
-    private float xInput;                   // Ë®Æ½ÊäÈëÖµ (-1, 0, 1)
-    private int faceDir = 1;                // ÃæÏò·½Ïò (1:ÓÒ, -1:×ó)
-    private bool faceRight = true;          // ÊÇ·ñÃæÏòÓÒ²à
-    private bool isPlayingFootstep = false; // ÊÇ·ñÕýÔÚ²¥·Å½Å²½Éù
+    [SerializeField] private float moveSpeed = 8f;        // ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Ù¶ï¿½
+    private float xInput;                   // Ë®Æ½ï¿½ï¿½ï¿½ï¿½Öµ (-1, 0, 1)
+    private int faceDir = 1;                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (1:ï¿½ï¿½, -1:ï¿½ï¿½)
+    private bool faceRight = true;          // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½
+    private bool isPlayingFootstep = false; // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Å½Å²ï¿½ï¿½ï¿½
 
-    // ========== ÌøÔ¾Ïà¹Ø±äÁ¿ ==========
+    // ========== ï¿½ï¿½Ô¾ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ ==========
     [Header("Jump Settings")]
-    [SerializeField] private float jumpForce = 13f;       // ÌøÔ¾Á¦¶È
-    [SerializeField] private float maxJumpHeight = 4f;    // ×î´óÌøÔ¾¸ß¶È
-    [SerializeField] private int maxJumpCount = 2;        // ×î´óÌøÔ¾´ÎÊý£¨¶þ¶ÎÌø£©
-    [SerializeField] private float jumpBufferTime = 0.15f; // ÌøÔ¾»º³åÊ±¼ä£¨ÌáÇ°°´¼üÓÐÐ§Ê±¼ä£©
-    [SerializeField] private float coyoteTime = 0.1f;     // ÍÁÀÇÊ±¼ä£¨Àë¿ªÆ½Ì¨ºóÈÔ¿ÉÌøÔ¾µÄÊ±¼ä£©
+    [SerializeField] private float jumpForce = 13f;       // ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private float maxJumpHeight = 4f;    // ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ß¶ï¿½
+    [SerializeField] private int maxJumpCount = 2;        // ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private float jumpBufferTime = 0.15f; // ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¨ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§Ê±ï¿½ä£©
+    [SerializeField] private float coyoteTime = 0.1f;     // ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¨ï¿½ë¿ªÆ½Ì¨ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½Ê±ï¿½ä£©
 
-    // ÌøÔ¾×´Ì¬±äÁ¿
-    private int currentJumpCount = 0;       // µ±Ç°ÌøÔ¾´ÎÊý
-    private float jumpBufferCounter;        // ÌøÔ¾»º³å¼ÆÊ±Æ÷
-    private float coyoteTimeCounter;        // ÍÁÀÇÊ±¼ä¼ÆÊ±Æ÷
-    private bool isJumping = false;         // ÊÇ·ñÕýÔÚÌøÔ¾
-    private float[] jumpStartY;             // Ã¿¶ÎÌøÔ¾µÄÆðÊ¼Y×ø±ê
-    private bool[] jumpHeightReached;       // Ã¿¶ÎÌøÔ¾ÊÇ·ñÒÑ´ïµ½×î´ó¸ß¶È
+    // ï¿½ï¿½Ô¾×´Ì¬ï¿½ï¿½ï¿½ï¿½
+    private int currentJumpCount = 0;       // ï¿½ï¿½Ç°ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
+    private float jumpBufferCounter;        // ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    private float coyoteTimeCounter;        // ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    private bool isJumping = false;         // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾
+    private float[] jumpStartY;             // Ã¿ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½Ê¼Yï¿½ï¿½ï¿½ï¿½
+    private bool[] jumpHeightReached;       // Ã¿ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½Ç·ï¿½ï¿½Ñ´ïµ½ï¿½ï¿½ï¿½ß¶ï¿½
 
-    // ========== ÖØÁ¦ÓëÏÂÂäÏà¹Ø±äÁ¿ ==========
+    // ========== ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ ==========
     [Header("Gravity & Fall Settings")]
-    [SerializeField] private float riseGravityScale = 1f;      // ÉÏÉý½×¶ÎÖØÁ¦ÏµÊý
-    [SerializeField] private float fallGravityScale = 2.2f;    // ÏÂÂä½×¶ÎÖØÁ¦ÏµÊý
-    [SerializeField] private float fastFallGravityScale = 3.5f; // ¿ìËÙÏÂÂäÖØÁ¦ÏµÊý
-    [SerializeField] private float maxFallSpeed = -25f;        // ×î´óÏÂÂäËÙ¶ÈÏÞÖÆ
-    private bool isFastFalling = false;     // ÊÇ·ñÕýÔÚ¿ìËÙÏÂÂä
+    [SerializeField] private float riseGravityScale = 1f;      // ï¿½ï¿½ï¿½ï¿½ï¿½×¶ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½
+    [SerializeField] private float fallGravityScale = 2.2f;    // ï¿½ï¿½ï¿½ï¿½×¶ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½
+    [SerializeField] private float fastFallGravityScale = 3.5f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½
+    [SerializeField] private float maxFallSpeed = -25f;        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½
+    private bool isFastFalling = false;     // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    // ========== ³å´ÌÏà¹Ø±äÁ¿ ==========
+    // ========== ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ ==========
     [Header("Dash Settings")]
-    [SerializeField] private float dashDuration = 0.2f;   // ³å´Ì³ÖÐøÊ±¼ä
-    [SerializeField] private float dashSpeed = 2f;        // ³å´ÌËÙ¶È±¶Êý
-    private float dashTime;                // ³å´ÌÊ£ÓàÊ±¼ä
-    private bool isDashing = false;        // ÊÇ·ñÕýÔÚ³å´Ì
+    [SerializeField] private float dashDuration = 0.2f;   // ï¿½ï¿½Ì³ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    [SerializeField] private float dashSpeed = 2f;        // ï¿½ï¿½ï¿½ï¿½Ù¶È±ï¿½ï¿½ï¿½
+    private float dashTime;                // ï¿½ï¿½ï¿½Ê£ï¿½ï¿½Ê±ï¿½ï¿½
+    private bool isDashing = false;        // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ú³ï¿½ï¿½
 
-    // ========== Åö×²¼ì²âÏà¹Ø±äÁ¿ ==========
+    // ========== ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ ==========
     [Header("Collision Detection")]
-    [SerializeField] private LayerMask whatIsGround;          // µØÃæ²ã¼¶ÑÚÂë
-    [SerializeField] private float groundCheckDistance = 0.1f; // µØÃæ¼ì²â¾àÀë
-    [SerializeField] private Vector3 groundCheckOffset = Vector3.zero; // µØÃæ¼ì²âÆ«ÒÆ
-    private bool isGround;                 // ÊÇ·ñÔÚµØÃæÉÏ
+    [SerializeField] private LayerMask whatIsGround;          // ï¿½ï¿½ï¿½ï¿½ã¼¶ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private float groundCheckDistance = 0.1f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Vector3 groundCheckOffset = Vector3.zero; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½
+    private bool isGround;                 // ï¿½Ç·ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
 
-    // ========== Ç½±Ú»¬ÐÐÏà¹Ø±äÁ¿ ==========
+    // ========== Ç½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ ==========
     [Header("Wall Slide Settings")]
-    [SerializeField] private LayerMask whatIsWall;            // Ç½±Ú²ã¼¶ÑÚÂë
-    [SerializeField] private float wallCheckDistance = 0.5f;  // Ç½±Ú¼ì²â¾àÀë
-    [SerializeField] private Vector3 wallCheckOffset = new Vector3(0, 1.6f, 0); // Ç½±Ú¼ì²âÆ«ÒÆ
-    [SerializeField] private float wallSlideSpeed = 2f;       // Ç½±Ú»¬ÐÐËÙ¶È
-    [SerializeField] private float wallJumpForce = 10f;       // Ç½±ÚÌøÔ¾Á¦¶È
-    [SerializeField] private Vector2 wallJumpDirection = new Vector2(1f, 1.5f); // Ç½±ÚÌøÔ¾·½Ïò
-    private bool isTouchingWall;           // ÊÇ·ñ½Ó´¥Ç½±Ú
-    private bool isWallSliding;            // ÊÇ·ñÕýÔÚÇ½±Ú»¬ÐÐ
-    private bool isTouchingRightWall;      // ÊÇ·ñ½Ó´¥ÓÒ²àÇ½±Ú
-    private bool isTouchingLeftWall;       // ÊÇ·ñ½Ó´¥×ó²àÇ½±Ú
-    private bool wallSlideInput;           // Ç½±Ú»¬ÐÐÊäÈë±êÖ¾
+    [SerializeField] private LayerMask whatIsWall;            // Ç½ï¿½Ú²ã¼¶ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private float wallCheckDistance = 0.5f;  // Ç½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Vector3 wallCheckOffset = new Vector3(0, 1.6f, 0); // Ç½ï¿½Ú¼ï¿½ï¿½Æ«ï¿½ï¿½
+    [SerializeField] private float wallSlideSpeed = 2f;       // Ç½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+    [SerializeField] private float wallJumpForce = 10f;       // Ç½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Vector2 wallJumpDirection = new Vector2(1f, 1.5f); // Ç½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
+    private bool isTouchingWall;           // ï¿½Ç·ï¿½Ó´ï¿½Ç½ï¿½ï¿½
+    private bool isWallSliding;            // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½Ú»ï¿½ï¿½ï¿½
+    private bool isTouchingRightWall;      // ï¿½Ç·ï¿½Ó´ï¿½ï¿½Ò²ï¿½Ç½ï¿½ï¿½
+    private bool isTouchingLeftWall;       // ï¿½Ç·ï¿½Ó´ï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½
+    private bool wallSlideInput;           // Ç½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾
 
-    // ========== ÉúÃüÖÜÆÚ·½·¨ ==========
+    // ========== ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ ==========
 
     /// <summary>
-    /// ³õÊ¼»¯·½·¨£¬ÔÚÓÎÏ·¿ªÊ¼Ê±µ÷ÓÃÒ»´Î
+    /// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Ê¼Ê±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
     /// </summary>
     void Start()
     {
-        // »ñÈ¡×é¼þÒýÓÃ
+        // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         rb = GetComponent<Rigidbody>();
 
-        // »ñÈ¡½ÇÉ«Ä£ÐÍÒýÓÃ£¨×ÓÎïÌå£©
+        // ï¿½ï¿½È¡ï¿½ï¿½É«Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å£©
         if (characterModel == null)
         {
-            // Èç¹ûÃ»ÓÐÖ¸¶¨£¬³¢ÊÔ´Ó×ÓÎïÌåÖÐ²éÕÒ
+            // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½
             if (transform.childCount > 0)
             {
                 characterModel = transform.GetChild(0);
@@ -94,7 +94,7 @@ public class PlayerNew : MonoBehaviour
             }
         }
 
-        // ´Ó½ÇÉ«Ä£ÐÍÖÐ»ñÈ¡¶¯»­×é¼þ
+        // ï¿½Ó½ï¿½É«Ä£ï¿½ï¿½ï¿½Ð»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (characterModel != null)
         {
             anime = characterModel.GetComponent<Animator>();
@@ -104,7 +104,7 @@ public class PlayerNew : MonoBehaviour
             }
         }
 
-        // ³õÊ¼»¯ÌøÔ¾Ïà¹ØÊý×é
+        // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         jumpStartY = new float[maxJumpCount];
         jumpHeightReached = new bool[maxJumpCount];
         for (int i = 0; i < maxJumpCount; i++)
@@ -112,81 +112,81 @@ public class PlayerNew : MonoBehaviour
             jumpHeightReached[i] = false;
         }
 
-        // ³õÊ¼»¯¸ÕÌåÉèÖÃ
-        rb.useGravity = false; // ½ûÓÃÄ¬ÈÏÖØÁ¦£¬Ê¹ÓÃ×Ô¶¨ÒåÖØÁ¦ÏµÍ³
+        // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        rb.useGravity = false; // ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³
     }
 
     /// <summary>
-    /// Ã¿Ö¡¸üÐÂ£¬ÓÃÓÚ´¦ÀíÊäÈëºÍ·ÇÎïÀíÏà¹ØµÄÂß¼­
+    /// Ã¿Ö¡ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ß¼ï¿½
     /// </summary>
     void Update()
     {
-        GetInput();             // »ñÈ¡Íæ¼ÒÊäÈë
-        HandleTimers();         // ¸üÐÂ¸÷ÖÖ¼ÆÊ±Æ÷
-        HandleJumpInput();      // ´¦ÀíÌøÔ¾ÊäÈë
-        HandleDashInput();      // ´¦Àí³å´ÌÊäÈë
-        UpdateAnimations();     // ¸üÐÂ¶¯»­×´Ì¬
+        GetInput();             // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        HandleTimers();         // ï¿½ï¿½ï¿½Â¸ï¿½ï¿½Ö¼ï¿½Ê±ï¿½ï¿½
+        HandleJumpInput();      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
+        HandleDashInput();      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        UpdateAnimations();     // ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½×´Ì¬
     }
 
     /// <summary>
-    /// ¹Ì¶¨Ê±¼ä²½³¤¸üÐÂ£¬ÓÃÓÚÎïÀíÏà¹ØµÄ¼ÆËã
-    /// ±£Ö¤ÎïÀí¼ÆËãµÄÎÈ¶¨ÐÔ£¬²»ÊÜÖ¡ÂÊÓ°Ïì
+    /// ï¿½Ì¶ï¿½Ê±ï¿½ä²½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ØµÄ¼ï¿½ï¿½ï¿½
+    /// ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½Ô£ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½Ó°ï¿½ï¿½
     /// </summary>
     void FixedUpdate()
     {
-        GroundCheck();          // µØÃæÅö×²¼ì²â
-        WallCheck();            // Ç½±ÚÅö×²¼ì²â
-        HandleMovement();       // ´¦ÀíÒÆ¶¯Âß¼­
-        HandleJump();           // ´¦ÀíÌøÔ¾Âß¼­
-        HandleWallSlide();      // ´¦ÀíÇ½±Ú»¬ÐÐÂß¼­
-        HandleGravity();        // Ó¦ÓÃ×Ô¶¨ÒåÖØÁ¦
-        HandleFallSpeed();      // ´¦ÀíÏÂÂäËÙ¶È
-        FlipController();       // ¿ØÖÆ½ÇÉ«·­×ª
-        CheckJumpHeight();      // ¼ì²éÃ¿¶ÎÌøÔ¾¸ß¶ÈÏÞÖÆ
+        GroundCheck();          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½
+        WallCheck();            // Ç½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½
+        HandleMovement();       // ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ß¼ï¿½
+        HandleJump();           // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ß¼ï¿½
+        HandleWallSlide();      // ï¿½ï¿½ï¿½ï¿½Ç½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
+        HandleGravity();        // Ó¦ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        HandleFallSpeed();      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+        FlipController();       // ï¿½ï¿½ï¿½Æ½ï¿½É«ï¿½ï¿½×ª
+        CheckJumpHeight();      // ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ß¶ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 
-    // ========== ÊäÈë´¦ÀíÓë¼ÆÊ±Æ÷¹ÜÀí ==========
+    // ========== ï¿½ï¿½ï¿½ë´¦ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ==========
 
     /// <summary>
-    /// »ñÈ¡Íæ¼ÒÊäÈë
+    /// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     private void GetInput()
     {
-        // »ñÈ¡Ë®Æ½ÊäÈë£¬·µ»ØÖµÔÚ -1£¨×ó£©µ½ 1£¨ÓÒ£©Ö®¼ä
+        // ï¿½ï¿½È¡Ë®Æ½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ -1ï¿½ï¿½ï¿½ó£©µï¿½ 1ï¿½ï¿½ï¿½Ò£ï¿½Ö®ï¿½ï¿½
         float previousInput = xInput;
         xInput = Input.GetAxisRaw("Horizontal");
         bool wasMoving = Mathf.Abs(previousInput) > 0.1f;
         bool isMovingNow = Mathf.Abs(xInput) > 0.1f;
 
-        // ¼ì²éÊÇ·ñÔÚµØÃæÉÏ
+        // ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
         bool canPlayFootstep = isGround && !isWallSliding;
 
-        // ¿ªÊ¼ÒÆ¶¯ÇÒÔÚµØÃæÉÏÊ±²¥·ÅÒôÐ§
+        // ï¿½ï¿½Ê¼ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§
         if (!wasMoving && isMovingNow && canPlayFootstep)
         {
             AudioManager.instance.PlaySFX(0);
             isPlayingFootstep = true;
         }
-        // ³ÖÐøÒÆ¶¯ÇÒÔÚµØÃæÉÏÊ±£ºÈç¹ûÖ®Ç°Ã»ÔÚ²¥·Å£¬¿ªÊ¼²¥·Å
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ö®Ç°Ã»ï¿½Ú²ï¿½ï¿½Å£ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
         else if (isMovingNow && canPlayFootstep && !isPlayingFootstep)
         {
             AudioManager.instance.PlaySFX(0);
             isPlayingFootstep = true;
         }
-        // Í£Ö¹ÒÆ¶¯Ê±Í£Ö¹ÒôÐ§
+        // Í£Ö¹ï¿½Æ¶ï¿½Ê±Í£Ö¹ï¿½ï¿½Ð§
         else if (wasMoving && !isMovingNow && isPlayingFootstep)
         {
             AudioManager.instance.StopSFX(0);
             isPlayingFootstep = false;
         }
-        // Àë¿ªµØÃæÊ±Í£Ö¹ÒôÐ§
+        // ï¿½ë¿ªï¿½ï¿½ï¿½ï¿½Ê±Í£Ö¹ï¿½ï¿½Ð§
         else if (!canPlayFootstep && isPlayingFootstep)
         {
             AudioManager.instance.StopSFX(0);
             isPlayingFootstep = false;
         }
 
-        // ¼ì²âÇ½±Ú»¬ÐÐÊäÈë£¨°´ÏÂ·½Ïò¼ü³¯ÏòÇ½±Ú£©
+        // ï¿½ï¿½ï¿½Ç½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¨ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½Ú£ï¿½
         bool rightWallInput = (xInput > 0);
         bool leftWallInput = (xInput < 0);
 
@@ -195,36 +195,36 @@ public class PlayerNew : MonoBehaviour
     }
 
     /// <summary>
-    /// ¹ÜÀí¸÷ÖÖ¼ÆÊ±Æ÷µÄ¸üÐÂ
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½Ê±ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½
     /// </summary>
     private void HandleTimers()
     {
-        // ÌøÔ¾»º³å¼ÆÊ±Æ÷£ºÔÊÐíÍæ¼ÒÔÚÂäµØÇ°ÌáÇ°°´ÏÂÌøÔ¾¼ü
+        // ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½
         jumpBufferCounter -= Time.deltaTime;
 
-        // ÍÁÀÇÊ±¼ä¼ÆÊ±Æ÷£ºÔÊÐíÍæ¼ÒÔÚÀë¿ªÆ½Ì¨ºó¶ÌÊ±¼äÄÚÈÔ¿ÉÌøÔ¾
+        // ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¿ªÆ½Ì¨ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½Ô¾
         if (isGround)
         {
-            coyoteTimeCounter = coyoteTime; // ÔÚµØÃæÉÏÊ±ÖØÖÃÍÁÀÇÊ±¼ä
+            coyoteTimeCounter = coyoteTime; // ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
         }
         else
         {
-            coyoteTimeCounter -= Time.deltaTime; // ÔÚ¿ÕÖÐÊ±µÝ¼õ¼ÆÊ±Æ÷
+            coyoteTimeCounter -= Time.deltaTime; // ï¿½Ú¿ï¿½ï¿½ï¿½Ê±ï¿½Ý¼ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
         }
 
-        // ³å´Ì¼ÆÊ±Æ÷
+        // ï¿½ï¿½Ì¼ï¿½Ê±ï¿½ï¿½
         dashTime -= Time.deltaTime;
     }
 
     /// <summary>
-    /// ´¦ÀíÌøÔ¾Ïà¹ØµÄÊäÈë¼ì²â
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     private void HandleJumpInput()
     {
-        // ¼ì²âÌøÔ¾¼ü°´ÏÂ£¬ÉèÖÃÌøÔ¾»º³å
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Ç½±ÚÌøÔ¾¼ì²â
+            // Ç½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½
             if (isWallSliding)
             {
                 ExecuteWallJump();
@@ -235,13 +235,13 @@ public class PlayerNew : MonoBehaviour
             }
         }
 
-        // ¼ì²â¿ìËÙÏÂÂäÊäÈë£¨°´ÏÂS¼ü»òÏÂ·½Ïò¼ü£©
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¨ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         isFastFalling = (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) &&
                         !isGround && rb.velocity.y < 0;
     }
 
     /// <summary>
-    /// ´¦Àí³å´ÌÊäÈë
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     private void HandleDashInput()
     {
@@ -250,7 +250,7 @@ public class PlayerNew : MonoBehaviour
             StartDash();
         }
 
-        // ¸üÐÂ³å´Ì¼ÆÊ±Æ÷
+        // ï¿½ï¿½ï¿½Â³ï¿½Ì¼ï¿½Ê±ï¿½ï¿½
         if (isDashing)
         {
             dashTime -= Time.deltaTime;
@@ -262,82 +262,82 @@ public class PlayerNew : MonoBehaviour
     }
 
     /// <summary>
-    /// ¿ªÊ¼³å´Ì
+    /// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½
     /// </summary>
     private void StartDash()
     {
         isDashing = true;
         dashTime = dashDuration;
-        Debug.Log($"ÉèÖÃ¶¯»­²ÎÊý£ºisDashing={anime.GetBool("isDashing")}");
-        // ²¥·Å³å´ÌÌØÐ§
+        Debug.Log($"ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½isDashing={anime.GetBool("isDashing")}");
+        // ï¿½ï¿½ï¿½Å³ï¿½ï¿½ï¿½ï¿½Ð§
         if (VfxManager.instance != null)
         {
             VfxManager.instance.PlayVFX(0, this.transform.position);
         }
 
-        // ²¥·Å³å´ÌÒôÐ§£¨¿ÉÑ¡£©
+        // ï¿½ï¿½ï¿½Å³ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
         if (AudioManager.instance != null)
         {
-            AudioManager.instance.PlaySFX(3); // ¼ÙÉè3ÊÇ³å´ÌÒôÐ§µÄË÷Òý
+            AudioManager.instance.PlaySFX(3); // ï¿½ï¿½ï¿½ï¿½3ï¿½Ç³ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         }
         
     }
     /// <summary>
-    /// ½áÊø³å´Ì
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     private void EndDash()
     {
         isDashing = false;
-        Debug.Log($"ÉèÖÃ¶¯»­²ÎÊý£ºisDashing={anime.GetBool("isDashing")}");
+        Debug.Log($"ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½isDashing={anime.GetBool("isDashing")}");
     }
 
 
 
-    // ========== ÒÆ¶¯¿ØÖÆÏµÍ³ ==========
+    // ========== ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ ==========
 
     /// <summary>
-    /// ´¦Àí½ÇÉ«ÒÆ¶¯Âß¼­ - ¼ò»¯°æ±¾
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½Æ¶ï¿½ï¿½ß¼ï¿½ - ï¿½ò»¯°æ±¾
     /// </summary>
     private void HandleMovement()
     {
-        // Ç½±Ú»¬ÐÐÊ±ÏÞÖÆË®Æ½ÒÆ¶¯
+        // Ç½ï¿½Ú»ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ë®Æ½ï¿½Æ¶ï¿½
         if (isWallSliding)
         {
-            // Ç½±Ú»¬ÐÐÊ±±£³ÖË®Æ½ËÙ¶ÈÎªÁã£¬Ö»ÔÊÐí´¹Ö±»¬ÐÐ
+            // Ç½ï¿½Ú»ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ë®Æ½ï¿½Ù¶ï¿½Îªï¿½ã£¬Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½
             rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
             return;
         }
 
-        // ³å´ÌÂß¼­£ºÔÚ³å´ÌÊ±¼äÄÚÓ¦ÓÃ³å´ÌËÙ¶È
+        // ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½Ú³ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½Ù¶ï¿½
         if (isDashing)
         {
-            // ³å´ÌÊ±³¯ÃæÏò·½ÏòÒÆ¶¯£¬ËÙ¶ÈÎª»ù´¡ËÙ¶È³ËÒÔ³å´Ì±¶Êý
+            // ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È³ï¿½ï¿½Ô³ï¿½Ì±ï¿½ï¿½ï¿½
             float dashTargetSpeed = faceDir * moveSpeed * dashSpeed;
             rb.velocity = new Vector3(dashTargetSpeed, rb.velocity.y, rb.velocity.z);
         }
         else
         {
-            // Õý³£ÒÆ¶¯
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
             float targetSpeed = xInput * moveSpeed;
             rb.velocity = new Vector3(targetSpeed, rb.velocity.y, rb.velocity.z);
         }
     }
 
     /// <summary>
-    /// ¿ØÖÆ½ÇÉ«³¯Ïò
-    /// ¸ù¾ÝÒÆ¶¯·½Ïò×Ô¶¯·­×ª½ÇÉ« sprite
+    /// ï¿½ï¿½ï¿½Æ½ï¿½É«ï¿½ï¿½ï¿½ï¿½
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½×ªï¿½ï¿½É« sprite
     /// </summary>
     private void FlipController()
     {
-        // Ç½±Ú»¬ÐÐÊ±²»ÔÊÐí·­×ª
+        // Ç½ï¿½Ú»ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
         if (isWallSliding) return;
 
-        // ÏòÓÒÒÆ¶¯ÇÒµ±Ç°ÃæÏò×óÊ±·­×ª
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Òµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½×ª
         if (xInput > 0.1f && !faceRight)
         {
             Flip();
         }
-        // Ïò×óÒÆ¶¯ÇÒµ±Ç°ÃæÏòÓÒÊ±·­×ª
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Òµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½×ª
         else if (xInput < -0.1f && faceRight)
         {
             Flip();
@@ -345,141 +345,141 @@ public class PlayerNew : MonoBehaviour
     }
 
     /// <summary>
-    /// Ö´ÐÐ½ÇÉ«·­×ª£¨Ö»·­×ª×ÓÎïÌå£©
+    /// Ö´ï¿½Ð½ï¿½É«ï¿½ï¿½×ªï¿½ï¿½Ö»ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½å£©
     /// </summary>
     private void Flip()
     {
-        faceDir *= -1;          // ·´×ªÃæÏò·½Ïò
-        faceRight = !faceRight; // ¸üÐÂÃæÏò×´Ì¬
+        faceDir *= -1;          // ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        faceRight = !faceRight; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 
-        // Ö»·­×ª½ÇÉ«Ä£ÐÍ£¬²»·­×ª¸¸ÎïÌå
+        // Ö»ï¿½ï¿½×ªï¿½ï¿½É«Ä£ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (characterModel != null)
         {
-            // Í¨¹ýÐý×ªÊµÏÖÊÓ¾õÉÏµÄ·­×ª
+            // Í¨ï¿½ï¿½ï¿½ï¿½×ªÊµï¿½ï¿½ï¿½Ó¾ï¿½ï¿½ÏµÄ·ï¿½×ª
             characterModel.Rotate(0, 180, 0);
         }
     }
 
-    // ========== ÌøÔ¾¿ØÖÆÏµÍ³ ==========
+    // ========== ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ÏµÍ³ ==========
 
     /// <summary>
-    /// ´¦ÀíÌøÔ¾Âß¼­£¬°üº¬ÌøÔ¾»º³åºÍÍÁÀÇÊ±¼ä
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
     /// </summary>
     private void HandleJump()
     {
         if (isDashing) return;
-        // ÖØÖÃÌøÔ¾×´Ì¬£ºµ±½ÇÉ«ÔÚµØÃæÉÏÇÒÕýÔÚÏÂÂä»ò¾²Ö¹Ê±
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹Ê±
         if (isGround && rb.velocity.y <= 0)
         {
-            currentJumpCount = 0;    // ÖØÖÃÌøÔ¾¼ÆÊý
-            isJumping = false;       // ±ê¼ÇÎª·ÇÌøÔ¾×´Ì¬
+            currentJumpCount = 0;    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
+            isJumping = false;       // ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ô¾×´Ì¬
 
-            // ÖØÖÃËùÓÐÌøÔ¾¸ß¶ÈÏÞÖÆ×´Ì¬
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ß¶ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
             for (int i = 0; i < maxJumpCount; i++)
             {
                 jumpHeightReached[i] = false;
             }
         }
 
-        // Ö´ÐÐÌøÔ¾Ìõ¼þ¼ì²é£ºÌøÔ¾»º³åÓÐÐ§ÇÒ¿ÉÒÔÌøÔ¾£¨Ç½±Ú»¬ÐÐÊ±²»ÔÊÐíÆÕÍ¨ÌøÔ¾£©
+        // Ö´ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£ºï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½Ò¿ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½Ç½ï¿½Ú»ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½Ô¾ï¿½ï¿½
         if (jumpBufferCounter > 0 && CanJump() && !isWallSliding)
         {
-            ExecuteJump(); // Ö´ÐÐÌøÔ¾
+            ExecuteJump(); // Ö´ï¿½ï¿½ï¿½ï¿½Ô¾
         }
 
-        // Ð¡Ìø»úÖÆ£ºËÉ¿ªÌøÔ¾¼üÊ±¼õÉÙÉÏÉýËÙ¶È
+        // Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ï¿½É¿ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
         if (isJumping && rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
         {
-            // Á¢¼´¼õÉÙYÖáËÙ¶È£¬ÊµÏÖÐ¡ÌøÐ§¹û
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½Ù¶È£ï¿½Êµï¿½ï¿½Ð¡ï¿½ï¿½Ð§ï¿½ï¿½
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.5f, rb.velocity.z);
         }
     }
 
     /// <summary>
-    /// ¼ì²éÊÇ·ñ¿ÉÒÔ½øÐÐÌøÔ¾
-    /// ¿¼ÂÇÁËÍÁÀÇÊ±¼äºÍ¶à¶ÎÌø
+    /// ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Í¶ï¿½ï¿½ï¿½ï¿½
     /// </summary>
-    /// <returns>ÊÇ·ñ¿ÉÒÔÌøÔ¾</returns>
+    /// <returns>ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾</returns>
     private bool CanJump()
     {
-        // µÚÒ»¶ÎÌøÌõ¼þ£ºÔÚµØÃæÉÏ»òÍÁÀÇÊ±¼äÄÚ£¬ÇÒÉÐÎ´¿ªÊ¼ÌøÔ¾
+        // ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½Ï»ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½Ê¼ï¿½ï¿½Ô¾
         bool canFirstJump = (isGround || coyoteTimeCounter > 0) && currentJumpCount == 0;
 
-        // ¶à¶ÎÌøÌõ¼þ£ºÔÚ¿ÕÖÐÇÒÌøÔ¾´ÎÊýÎ´´ïÉÏÏÞ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         bool canMultiJump = !isGround && currentJumpCount < maxJumpCount;
 
         return canFirstJump || canMultiJump;
     }
 
     /// <summary>
-    /// Ö´ÐÐÌøÔ¾¶¯×÷
+    /// Ö´ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     private void ExecuteJump()
     {
-        // ¼ÇÂ¼µ±Ç°ÌøÔ¾¶ÎµÄÆðÊ¼Î»ÖÃ
+        // ï¿½ï¿½Â¼ï¿½ï¿½Ç°ï¿½ï¿½Ô¾ï¿½Îµï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½
         jumpStartY[currentJumpCount] = transform.position.y;
         jumpHeightReached[currentJumpCount] = false;
 
-        // ÖØÖÃ´¹Ö±ËÙ¶È£¬È·±£Ã¿´ÎÌøÔ¾¸ß¶ÈÒ»ÖÂ
+        // ï¿½ï¿½ï¿½Ã´ï¿½Ö±ï¿½Ù¶È£ï¿½È·ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ß¶ï¿½Ò»ï¿½ï¿½
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
-        // Ó¦ÓÃÌøÔ¾ËÙ¶È
+        // Ó¦ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½Ù¶ï¿½
         rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
 
-        // ¸üÐÂÌøÔ¾×´Ì¬
-        currentJumpCount++;          // Ôö¼ÓÌøÔ¾¼ÆÊý
-        jumpBufferCounter = 0;       // Çå³ýÌøÔ¾»º³å
-        coyoteTimeCounter = 0;       // Çå³ýÍÁÀÇÊ±¼ä
-        isJumping = true;            // ±ê¼ÇÎªÌøÔ¾×´Ì¬
-        isFastFalling = false;       // ÖØÖÃ¿ìËÙÏÂÂä×´Ì¬
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾×´Ì¬
+        currentJumpCount++;          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
+        jumpBufferCounter = 0;       // ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
+        coyoteTimeCounter = 0;       // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+        isJumping = true;            // ï¿½ï¿½ï¿½Îªï¿½ï¿½Ô¾×´Ì¬
+        isFastFalling = false;       // ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 
-        // ²¥·ÅÌøÔ¾ÒôÐ§
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½Ð§
        
     }
 
     /// <summary>
-    /// Ö´ÐÐÇ½±ÚÌøÔ¾
+    /// Ö´ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½Ô¾
     /// </summary>
     private void ExecuteWallJump()
     {
-        // È·¶¨Ç½±ÚÌøÔ¾µÄ·½Ïò
+        // È·ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½Ä·ï¿½ï¿½ï¿½
         int jumpDirection;
 
 
-        // ¼ì²éÊÇ·ñÓÐË®Æ½ÊäÈë
+        // ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ë®Æ½ï¿½ï¿½ï¿½ï¿½
         if (Mathf.Abs(xInput) > 0.1f)
         {
-            // ÓÐÊäÈë£º¸ù¾ÝÊäÈë·½ÏòÌøÔ¾
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ë£ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë·½ï¿½ï¿½ï¿½ï¿½Ô¾
             jumpDirection = xInput > 0 ? 1 : -1;
         }
         else
         {
-            // Ã»ÓÐÊäÈë£º±£³Öµ±Ç°³¯Ïò
+            // Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ë£ºï¿½ï¿½ï¿½Öµï¿½Ç°ï¿½ï¿½ï¿½ï¿½
             jumpDirection = faceDir;
         }
 
         
 
-        // ¼ÆËãÇ½±ÚÌøÔ¾ËÙ¶È
+        // ï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½Ù¶ï¿½
         Vector2 jumpVelocity = new Vector2(wallJumpDirection.x * jumpDirection, wallJumpDirection.y);
-        jumpVelocity.Normalize(); // ±ê×¼»¯ÏòÁ¿
+        jumpVelocity.Normalize(); // ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         jumpVelocity *= wallJumpForce;
 
-        // Ó¦ÓÃÇ½±ÚÌøÔ¾ËÙ¶È
+        // Ó¦ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½Ù¶ï¿½
         rb.velocity = new Vector3(jumpVelocity.x, jumpVelocity.y, rb.velocity.z);
 
-        // ¸üÐÂ½ÇÉ«³¯Ïò
+        // ï¿½ï¿½ï¿½Â½ï¿½É«ï¿½ï¿½ï¿½ï¿½
         if (jumpDirection != faceDir)
         {
             Flip();
         }
 
-        // ÖØÖÃ×´Ì¬
+        // ï¿½ï¿½ï¿½ï¿½×´Ì¬
         isWallSliding = false;
         isJumping = true;
-        currentJumpCount = 1; // Ç½±ÚÌøÔ¾Ëã×÷µÚÒ»¶ÎÌøÔ¾
+        currentJumpCount = 1; // Ç½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ô¾
 
-        // ²¥·ÅÌøÔ¾ÒôÐ§
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½Ð§
         if (AudioManager.instance != null)
         {
             AudioManager.instance.PlaySFX(1);
@@ -487,53 +487,53 @@ public class PlayerNew : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼ì²éÃ¿¶ÎÌøÔ¾µÄ¸ß¶ÈÏÞÖÆ
+    /// ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½Ä¸ß¶ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     private void CheckJumpHeight()
     {
         if (!isJumping || currentJumpCount == 0) return;
 
-        // ¼ì²éµ±Ç°ÌøÔ¾¶ÎµÄ¸ß¶ÈÏÞÖÆ
+        // ï¿½ï¿½éµ±Ç°ï¿½ï¿½Ô¾ï¿½ÎµÄ¸ß¶ï¿½ï¿½ï¿½ï¿½ï¿½
         int currentJumpIndex = currentJumpCount - 1;
 
         if (!jumpHeightReached[currentJumpIndex] &&
             transform.position.y - jumpStartY[currentJumpIndex] >= maxJumpHeight &&
             rb.velocity.y > 0)
         {
-            // µ±Ç°ÌøÔ¾¶ÎÒÑ´ïµ½×î´ó¸ß¶È£¬ÏÞÖÆÉÏÉýËÙ¶È
+            // ï¿½ï¿½Ç°ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½Ñ´ïµ½ï¿½ï¿½ï¿½ß¶È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             jumpHeightReached[currentJumpIndex] = true;
         }
     }
 
-    // ========== Ç½±Ú»¬ÐÐ¿ØÖÆÏµÍ³ ==========
+    // ========== Ç½ï¿½Ú»ï¿½ï¿½Ð¿ï¿½ï¿½ï¿½ÏµÍ³ ==========
 
     /// <summary>
-    /// Ç½±Ú¼ì²â£¬Ê¹ÓÃ3DÉäÏß¼ì²âÅÐ¶ÏÊÇ·ñ½Ó´¥Ç½±Ú
+    /// Ç½ï¿½Ú¼ï¿½â£¬Ê¹ï¿½ï¿½3Dï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Ó´ï¿½Ç½ï¿½ï¿½
     /// </summary>
     private void WallCheck()
     {
-        // ¼ÆËãÇ½±Ú¼ì²âÎ»ÖÃ£¨¸¸ÎïÌåÎ»ÖÃ + Æ«ÒÆÁ¿£©
+        // ï¿½ï¿½ï¿½ï¿½Ç½ï¿½Ú¼ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ + Æ«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Vector3 wallDetectionPoint = transform.position + wallCheckOffset;
 
-        // 3DÉäÏß¼ì²âÓÒ²àÇ½±Ú£¨´Ó¼ÆËãÎ»ÖÃ¼ì²â£©
+        // 3Dï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Ò²ï¿½Ç½ï¿½Ú£ï¿½ï¿½Ó¼ï¿½ï¿½ï¿½Î»ï¿½Ã¼ï¿½â£©
         RaycastHit rightHit;
         isTouchingRightWall = Physics.Raycast(wallDetectionPoint, Vector3.right, out rightHit, wallCheckDistance, whatIsWall) && faceRight;
 
-        // 3DÉäÏß¼ì²â×ó²àÇ½±Ú£¨´Ó¼ÆËãÎ»ÖÃ¼ì²â£©
+        // 3Dï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½Ú£ï¿½ï¿½Ó¼ï¿½ï¿½ï¿½Î»ï¿½Ã¼ï¿½â£©
         RaycastHit leftHit;
         isTouchingLeftWall = Physics.Raycast(wallDetectionPoint, Vector3.left, out leftHit, wallCheckDistance, whatIsWall) && !faceRight;
 
-        // ¸üÐÂÇ½±Ú½Ó´¥×´Ì¬
+        // ï¿½ï¿½ï¿½ï¿½Ç½ï¿½Ú½Ó´ï¿½×´Ì¬
         isTouchingWall = isTouchingRightWall || isTouchingLeftWall;
 
-        // ¼ì²éÊÇ·ñÓ¦¸Ã¿ªÊ¼Ç½±Ú»¬ÐÐ£¨°´ÏÂ´¥·¢Ä£Ê½£©
+        // ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Ó¦ï¿½Ã¿ï¿½Ê¼Ç½ï¿½Ú»ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½
         if (!isGround && isTouchingWall && !isWallSliding && wallSlideInput)
         {
             isWallSliding = true;
         }
 
-        // ¼ì²éÊÇ·ñÓ¦¸Ã½áÊøÇ½±Ú»¬ÐÐ£¨ÂäµØ»òÀë¿ªÇ½±ÚÊ±×Ô¶¯½áÊø£©
+        // ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Ó¦ï¿½Ã½ï¿½ï¿½ï¿½Ç½ï¿½Ú»ï¿½ï¿½Ð£ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ë¿ªÇ½ï¿½ï¿½Ê±ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (isWallSliding)
         {
             bool shouldStopWallSlide = isGround || !isTouchingWall;
@@ -544,18 +544,18 @@ public class PlayerNew : MonoBehaviour
             }
         }
 
-        // ÖØÖÃÇ½±Ú»¬ÐÐÊäÈë±êÖ¾£¨È·±£Ö»´¥·¢Ò»´Î£©
+        // ï¿½ï¿½ï¿½ï¿½Ç½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½È·ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Î£ï¿½
         wallSlideInput = false;
     }
 
     /// <summary>
-    /// ´¦ÀíÇ½±Ú»¬ÐÐÂß¼­
+    /// ï¿½ï¿½ï¿½ï¿½Ç½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
     /// </summary>
     private void HandleWallSlide()
     {
         if (isWallSliding)
         {
-            // ÏÞÖÆÏÂÂäËÙ¶ÈÎªÇ½±Ú»¬ÐÐËÙ¶È
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ÎªÇ½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
             if (rb.velocity.y < -wallSlideSpeed)
             {
                 rb.velocity = new Vector3(rb.velocity.x, -wallSlideSpeed, rb.velocity.z);
@@ -563,141 +563,141 @@ public class PlayerNew : MonoBehaviour
         }
     }
 
-    // ========== ÖØÁ¦ÓëÏÂÂä¿ØÖÆÏµÍ³ ==========
+    // ========== ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ ==========
 
     /// <summary>
-    /// ´¦ÀíÖØÁ¦Ó¦ÓÃ£¬ÊµÏÖ×Ô¶¨ÒåÖØÁ¦ÏµÍ³
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ã£ï¿½Êµï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³
     /// </summary>
     private void HandleGravity()
     {
-        // Ç½±Ú»¬ÐÐÊ±Ê¹ÓÃ½ÏÐ¡µÄÖØÁ¦
+        // Ç½ï¿½Ú»ï¿½ï¿½ï¿½Ê±Ê¹ï¿½Ã½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (isWallSliding)
         {
-            // Ç½±Ú»¬ÐÐÊ±Ê¹ÓÃ½ÏÐ¡µÄÖØÁ¦ÏµÊý
+            // Ç½ï¿½Ú»ï¿½ï¿½ï¿½Ê±Ê¹ï¿½Ã½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½
             float wallSlideGravityScale = 0.5f;
             Vector3 wallSlideGravity = Physics.gravity * wallSlideGravityScale;
             rb.velocity += wallSlideGravity * Time.fixedDeltaTime;
             return;
         }
 
-        // »ñÈ¡µ±Ç°ÖØÁ¦ÏµÊý
+        // ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½
         float gravityScale = GetCurrentGravityScale();
 
-        // ¼ÆËãÖØÁ¦ÏòÁ¿²¢Ó¦ÓÃ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½
         Vector3 normalGravity = Physics.gravity * gravityScale;
         rb.velocity += normalGravity * Time.fixedDeltaTime;
     }
 
     /// <summary>
-    /// ¸ù¾Ý½ÇÉ«×´Ì¬»ñÈ¡µ±Ç°ÖØÁ¦ÏµÊý
+    /// ï¿½ï¿½ï¿½Ý½ï¿½É«×´Ì¬ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½
     /// </summary>
-    /// <returns>µ±Ç°ÖØÁ¦ÏµÊý</returns>
+    /// <returns>ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½</returns>
     private float GetCurrentGravityScale()
     {
-        if (isFastFalling) // ¿ìËÙÏÂÂä×´Ì¬
+        if (isFastFalling) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
         {
             return fastFallGravityScale;
         }
-        else if (rb.velocity.y < 0) // ÆÕÍ¨ÏÂÂä×´Ì¬
+        else if (rb.velocity.y < 0) // ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½×´Ì¬
         {
             return fallGravityScale;
         }
-        else // ÉÏÉý×´Ì¬
+        else // ï¿½ï¿½ï¿½ï¿½×´Ì¬
         {
             return riseGravityScale;
         }
     }
 
     /// <summary>
-    /// ´¦ÀíÏÂÂäËÙ¶ÈÏÞÖÆ
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     private void HandleFallSpeed()
     {
-        // Ç½±Ú»¬ÐÐÊ±ÒÑ¾­ÓÐËÙ¶ÈÏÞÖÆ£¬Ìø¹ý×î´óÏÂÂäËÙ¶È¼ì²é
+        // Ç½ï¿½Ú»ï¿½ï¿½ï¿½Ê±ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È¼ï¿½ï¿½
         if (isWallSliding) return;
 
-        // Èç¹ûÏÂÂäËÙ¶È³¬¹ý×î´óÏÞÖÆ£¬Ö±½ÓÉèÖÃÎª×î´óÏÂÂäËÙ¶È
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
         if (rb.velocity.y < maxFallSpeed)
         {
             rb.velocity = new Vector3(rb.velocity.x, maxFallSpeed, rb.velocity.z);
         }
     }
 
-    // ========== Åö×²¼ì²âÓë¶¯»­ÏµÍ³ ==========
+    // ========== ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ë¶¯ï¿½ï¿½ÏµÍ³ ==========
 
     /// <summary>
-    /// µØÃæ¼ì²â£¬Ê¹ÓÃ3DÉäÏß¼ì²âÅÐ¶ÏÊÇ·ñÔÚµØÃæÉÏ
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½â£¬Ê¹ï¿½ï¿½3Dï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     private void GroundCheck()
     {
-        bool wasGround = isGround; // ¼ÇÂ¼Ö®Ç°µÄµØÃæ×´Ì¬
+        bool wasGround = isGround; // ï¿½ï¿½Â¼Ö®Ç°ï¿½Äµï¿½ï¿½ï¿½×´Ì¬
 
-        // ¼ÆËãµØÃæ¼ì²âÎ»ÖÃ£¨¸¸ÎïÌåÎ»ÖÃ + Æ«ÒÆÁ¿£©
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ + Æ«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Vector3 groundDetectionPoint = transform.position + groundCheckOffset;
 
-        // ´Ó¼ÆËãÎ»ÖÃÏòÏÂ·¢Éä3DÉäÏß¼ì²âµØÃæ
+        // ï¿½Ó¼ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½3Dï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½
         RaycastHit hit;
         isGround = Physics.Raycast(groundDetectionPoint, Vector3.down, out hit, groundCheckDistance, whatIsGround);
 
-        // ÂäµØ¼ì²â£º´Ó¿ÕÖÐÂäµ½µØÃæÊ±´¥·¢
+        // ï¿½ï¿½Ø¼ï¿½â£ºï¿½Ó¿ï¿½ï¿½ï¿½ï¿½äµ½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
         if (!wasGround && isGround && rb.velocity.y <= 0)
         {
-            OnLand(); // µ÷ÓÃÂäµØ´¦Àí
+            OnLand(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½
         }
     }
 
     /// <summary>
-    /// ÂäµØÊ±µÄ´¦Àíº¯Êý
+    /// ï¿½ï¿½ï¿½Ê±ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     private void OnLand()
     {
-        // ¸ù¾ÝÏÂÂäËÙ¶È²¥·Å²»Í¬µÄÂäµØÒôÐ§
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È²ï¿½ï¿½Å²ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§
         if (AudioManager.instance != null && rb.velocity.y < -5f)
         {
-            AudioManager.instance.PlaySFX(2); // ¼ÙÉè2ÊÇÂäµØÒôÐ§µÄË÷Òý
+            AudioManager.instance.PlaySFX(2); // ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         }
     }
 
     /// <summary>
-    /// ¸üÐÂ¶¯»­×´Ì¬ºÍ²ÎÊý
+    /// ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½×´Ì¬ï¿½Í²ï¿½ï¿½ï¿½
     /// </summary>
     private void UpdateAnimations()
     {
-        // ÅÐ¶ÏÊÇ·ñÔÚÒÆ¶¯£¨»ùÓÚÊäÈë¶ø²»ÊÇÊµ¼ÊËÙ¶È£©
+        // ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Ù¶È£ï¿½
         isMoving = Mathf.Abs(xInput) > 0.1f;
 
-        // Ö±½ÓÉèÖÃ¶¯»­²ÎÊý£¬Ã»ÓÐÆ½»¬¹ý¶É
+        // Ö±ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (anime != null)
         {
-            anime.SetFloat("Speed", Mathf.Abs(xInput));  // ÒÆ¶¯ËÙ¶È£¨Ö±½ÓÊ¹ÓÃÊäÈëÖµ£©
-            anime.SetBool("isMoving", isMoving);         // ÊÇ·ñÔÚÒÆ¶¯
-            anime.SetBool("isGround", isGround);         // ÊÇ·ñÔÚµØÃæ
-            anime.SetBool("isWallSliding", isWallSliding); // ÊÇ·ñÔÚÇ½±Ú»¬ÐÐ
-            anime.SetBool("isDashing", isDashing);       // ÊÇ·ñÔÚ³å´Ì£¨ÐÂÔö£©
+            anime.SetFloat("Speed", Mathf.Abs(xInput));  // ï¿½Æ¶ï¿½ï¿½Ù¶È£ï¿½Ö±ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½
+            anime.SetBool("isMoving", isMoving);         // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
+            anime.SetBool("isGround", isGround);         // ï¿½Ç·ï¿½ï¿½Úµï¿½ï¿½ï¿½
+            anime.SetBool("isWallSliding", isWallSliding); // ï¿½Ç·ï¿½ï¿½ï¿½Ç½ï¿½Ú»ï¿½ï¿½ï¿½
+            anime.SetBool("isDashing", isDashing);       // ï¿½Ç·ï¿½ï¿½Ú³ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             anime.SetFloat("ySpeed", rb.velocity.y);
         }
     }
 
-    // ========== µ÷ÊÔÓë¿ÉÊÓ»¯ ==========
+    // ========== ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó»ï¿½ ==========
 
     /// <summary>
-    /// ÔÚSceneÊÓÍ¼ÖÐ»æÖÆµ÷ÊÔÍ¼ÐÎ
+    /// ï¿½ï¿½Sceneï¿½ï¿½Í¼ï¿½Ð»ï¿½ï¿½Æµï¿½ï¿½ï¿½Í¼ï¿½ï¿½
     /// </summary>
     private void OnDrawGizmos()
     {
-        // ¼ÆËã¼ì²âµãÎ»ÖÃ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
         Vector3 groundDetectionPoint = transform.position + groundCheckOffset;
         Vector3 wallDetectionPoint = transform.position + wallCheckOffset;
 
-        // »æÖÆµØÃæ¼ì²âÏß
+        // ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Gizmos.color = isGround ? Color.green : Color.red;
         Gizmos.DrawLine(groundDetectionPoint, groundDetectionPoint + Vector3.down * groundCheckDistance);
-        Gizmos.DrawSphere(groundDetectionPoint, 0.05f); // ÏÔÊ¾¼ì²âµã
+        Gizmos.DrawSphere(groundDetectionPoint, 0.05f); // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 
-        // »æÖÆÇ½±Ú¼ì²âÏß
+        // ï¿½ï¿½ï¿½ï¿½Ç½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½
         Gizmos.color = isTouchingWall ? Color.blue : Color.white;
         Gizmos.DrawLine(wallDetectionPoint, wallDetectionPoint + Vector3.right * wallCheckDistance);
         Gizmos.DrawLine(wallDetectionPoint, wallDetectionPoint + Vector3.left * wallCheckDistance);
-        Gizmos.DrawSphere(wallDetectionPoint, 0.05f); // ÏÔÊ¾¼ì²âµã
+        Gizmos.DrawSphere(wallDetectionPoint, 0.05f); // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
     }
 }
