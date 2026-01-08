@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HealthUI : MonoBehaviour
 {
     [Header("UI引用")]
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Image healthFillImage;
-    [SerializeField] private Text healthText;
+    [SerializeField] private TextMeshProUGUI healthText;
 
     [Header("颜色渐变")]
     [SerializeField] private Gradient healthGradient;
