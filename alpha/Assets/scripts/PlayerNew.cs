@@ -434,10 +434,7 @@ public class PlayerNew : MonoBehaviour
         isFastFalling = false;       // 重置快速下落状态
 
         // 播放跳跃音效
-        if (AudioManager.instance != null)
-        {
-            AudioManager.instance.PlaySFX(1); // 假设1是跳跃音效的索引
-        }
+       
     }
 
     /// <summary>
