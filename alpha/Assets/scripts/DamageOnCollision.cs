@@ -192,7 +192,7 @@ public class DamageOnCollision : MonoBehaviour
             position = collision.contacts[0].point;
             rotation = Quaternion.LookRotation(collision.contacts[0].normal);
         }
-
+        AudioManager.instance.PlaySFX(1);
         GameObject effect = Instantiate(hitEffect, position, rotation);
         Destroy(effect, 3f); // 3秒后销毁特效
     }
